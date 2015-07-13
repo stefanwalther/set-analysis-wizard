@@ -25,19 +25,27 @@ http://stackoverflow.com/questions/26899381/jison-getting-parsed-token-instead-o
 %lex
 %options flex case-insensitive
 
-aggr_type_list      ("Sum"|"Min"|"Max"|"Only"|"Mode"|"FirstSortedValue")
+aggr_type_list          ("Sum"|"Min"|"Max"|"Only"|"Mode"|"FirstSortedValue")
+set_identifier_list     ("1"|"$"|"$N"|"$_N")
+set_operator_list       ("+"|"-"|"*"|"/")
+field_selection_list    ("="|"+="|"-="|"*="|"/=")
 
 %%
 
-\s+                  /* skip whitespace */
-{aggr_type_list}     return 'aggr_type';
-/*[a-zA-Z0-9]+         return 'STR'*/
-"{"                  return 'curly_open';
-"}"                  return 'curly_close';
-"("                  return 'par_open';
-")"                  return 'par_close';
-\w+                  return "field_expression";
-<<EOF>>              return "EOF";
+\s+                     /* skip whitespace */
+{aggr_type_list}        return 'aggr_type';
+{set_identifier_list}   return 'set_identifier';
+{set_operator_list}     return 'set_operator';
+{field_selection_list}  return 'field_selection';
+\w+                     return "field_expression";
+"{"                     return 'curly_open';
+"}"                     return 'curly_close';
+"("                     return 'par_open';
+")"                     return 'par_close';
+"<"                     return 'anglebr_open';
+">"                     return 'anglebr_close';
+[a-zA-Z0-9]+            return 'STR'
+<<EOF>>                 return "EOF";
 /lex
 
 
@@ -50,6 +58,30 @@ start
     ;
 
 definition
+    // Sum(Sales)
     : aggr_type par_open field_expression par_close
-     {return $1;}
+        {return $1 + $2 + $3 + $4;}
+    // Sum({..}Sales)
+    | aggr_type par_open set_expression field_expression par_close
+        {return $1 + $2 + $3 + $4 + $5;}
+    ;
+
+set_expression
+    // {..}
+    : curly_open set_identifier curly_close
+        { $$ = $1 + $2 + $3;}
+    ;
+
+set_entity
+    //{$} or {1} or ...
+    : set_identifier
+        { return $1; }
+    //{$..} or {1..} or ...
+    | set_identifier set_modifier
+        return { $$ = $1 + $2; }
+    ;
+set_modifier
+    // <..>
+    : anglebr_open STR anglebr_close
+    return { $$ = $1 + $2 + $3; }
     ;

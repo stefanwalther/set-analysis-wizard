@@ -1,7 +1,14 @@
+import {Helpers} from './Helpers';
+
 /**
  * SetAnalysisDefinition holds the definition of a Set Analysis Expression, broken down into parts as described in the official documentation.
  *
  * @description:
+ *
+ * Overall definition (added for the Set Analysis Wizard):
+ * definition ::= aggr_type ( set_expression field_expression )
+ *
+ * From the documentation
  * set_expression ::= { set_entity { set_operator set_entity } }
  * set_entity ::= set_identifier [ set_modifier ]
  * set_identifier ::= 1 | $ | $N | $_N | bookmark_id | bookmark_name
@@ -20,18 +27,16 @@
  */
 export class SetAnalysisDefinition {
 	constructor () {
-		this.definition;					// Entire Set Analysis Expression
-		this.set_identifier = '$';           	// SetIdentifier
+		this.aggr_type = 'Sum';				// Aggregation Type, one of Aggregation types
+		this.set_identifier = '$';         	// SetIdentifier
 		this.set_operator = '+';			// SetOperator
+
 		this.SetIdentifierDesc = null;      // Description for the Set Identifier
-		this.AggregationType = null;        // AggregationType (just a property bag)
+		this.AggregationType = 'Sum';        // AggregationType (just a property bag)
 		this.AggregationTypeDesc = null;    // AggregationType Description (just a property bag)
 		this.FieldExpression = null;        // FieldExpression
 		this.Bookmark = null;               // Id or name of the bookmark
 		this.PersonalComment = null;        // PersonalComment
-		this.Expression = null;             // Final expression
-		this.ProductVersion = 100000;      	// Qlik Sense product version ...
-		this.PureDescription = "";        	// Pure Description
 		this.SetModifierActions = [];		// Collection of SetModifier actions
 	}
 
@@ -39,18 +44,35 @@ export class SetAnalysisDefinition {
 		return "{aggr_type}({{set_expression}}{field_expression})";
 	}
 
+	get Helpers() {
+		return new Helpers();
+	}
+
 	/**
 	 * Returns the full result of the Set Analysis Expression definition.
-	 * @returns {*}
+	 * @returns {*} Returns the Set Analysis Expression definition
 	 * @constructor
 	 */
-	get Definition() {
+	get Definition () {
 		return this._getBaseDefinition();
+	}
+
+	get AggregationType () {
+		return this.aggr_type;
+	}
+
+	set AggregationType ( value ) {
+		if ( this.Helpers.AggregationTypes.indexOf( value ) > -1 ) {
+			this.aggr_type = value;
+		} else {
+			console.error('Invalid aggreation type ', value);
+			//throw new Error( 'Invalid aggregation type, please use one of the predefined list' );
+		}
 	}
 
 	/**
 	 * Returns the current set_identifier, defaults to '$'.
-	 * @returns {string|*}
+	 * @returns {*}
 	 * @constructor
 	 */
 	get SetIdentifier () {

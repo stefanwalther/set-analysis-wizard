@@ -9,6 +9,8 @@ web.*.config
 /**/bower_components/
 /build/*_dev.zip
 .tmp/
+/out/
+
 
 # =========================
 # Visual Studio

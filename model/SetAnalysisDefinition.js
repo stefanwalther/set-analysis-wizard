@@ -41,7 +41,7 @@ export class SetAnalysisDefinition {
 	}
 
 	_getBaseDefinition () {
-		return "{aggr_type}({{set_expression}}{field_expression})";
+		return "{%aggr_type%}( {{%set_expression%}} {%field_expression%})";
 	}
 
 	get Helpers() {
@@ -53,8 +53,11 @@ export class SetAnalysisDefinition {
 	 * @returns {*} Returns the Set Analysis Expression definition
 	 * @constructor
 	 */
-	get Definition () {
-		return this._getBaseDefinition();
+	getResult () {
+		return this._build();
+	}
+	parseExpression() {
+
 	}
 
 	get AggregationType () {
@@ -94,6 +97,25 @@ export class SetAnalysisDefinition {
 			this.set_operator = value;
 		}
 	}
+
+	// ****************************************************************************************
+	// Main internal methods
+	// ****************************************************************************************
+	_build() {
+		let e = this._getBaseDefinition();
+		e = e.replace(/{%aggr_type%}/g, this.AggregationType);
+		e = e.replace(/{%set_expression%}/g, this._build_SetExpression());
+		e = e.replace(/{%field_expression%}/g, this.FieldExpression);
+		return e;
+	}
+
+	_build_SetExpression() {
+		return '';
+	}
+
+
+
+
 
 }
 

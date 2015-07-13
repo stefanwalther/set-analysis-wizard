@@ -25,3 +25,9 @@ gulp.task('default', function (  ) {
 
 });
 
+gulp.task('jison', function (  ) {
+	return gulp.src('./src/parser/parser.jison')
+	.pipe(require('gulp-jison')( {moduleType: 'commonjs'}))
+	.pipe(gulp.dest('./.out/parser'))
+});
+

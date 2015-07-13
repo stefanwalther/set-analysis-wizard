@@ -1,0 +1,2 @@
+{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"$","AggregationType":"Sum","FieldExpression":"Sales","Bookmark":"","PersonalComment":"Sum of Sales based on the current selection, but only consider years from 2000 to 2009, but exclude 2010, 2011, etc.","Expression":"Sum({$<Year={'200*'}>}Sales)","QlikViewVersion":"100000","Version":"1.00.00","SetModifierActions":[{"Action":"set_modify_by_value","Field":"Year","OtherField":"","FieldOperator":"=","ValuesOrExpression_1":"200*","ValuesOrExpression_2":"","SelectionOperator":"equal_to"}]}

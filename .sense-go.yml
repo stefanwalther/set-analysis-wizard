@@ -1,0 +1,29 @@
+# -------------------------------------------------------------------
+# General mandatory settings
+# -------------------------------------------------------------------
+packageName: 'swr-Set-Analysis-Wizard'
+
+# -------------------------------------------------------------------
+# Optional settings
+# -------------------------------------------------------------------
+localExtensionDir: ''         # defaults to the local extension directory
+srcDir: './src'               # defaults to './src'
+buildDir: './build'           # defaults to './build'
+tmDir: './.tmp'               # defaults to './.tmp'
+
+# -------------------------------------------------------------------
+# Task specific settings
+# -------------------------------------------------------------------
+debug:
+  minimal: true
+
+transpile:
+  src: './model/**/*.js'
+  dest: './.tmp/model'
+
+lessReduce:
+  src: './src/lib/less/**/_root.less'
+  dest: './src/lib/css/style.css'
+lessEach:
+  src: './src/lib/less/**/*.less'
+  dest: './src/lib/css'

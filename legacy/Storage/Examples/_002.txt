@@ -1,0 +1,2 @@
+﻿{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"$","AggregationType":"Count","FieldExpression":"Customer","Bookmark":"","PersonalComment":"Count values of field \"Customer\" based on the current selection","Expression":"Count({$}Customer)","SetModifierActions":null}

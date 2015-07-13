@@ -1,0 +1,2 @@
+{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"$","AggregationType":"Sum","FieldExpression":"Sales","Bookmark":"","PersonalComment":"Return Sum of Sales only for the year before the maximum year.","Expression":"Sum({$<Year={$(=Max(Year)-1)}>}Sales)","QlikViewVersion":"100000","Version":"1.00.00","SetModifierActions":[{"Action":"set_modify_by_expression","Field":"Year","OtherField":"","FieldOperator":"=","ValuesOrExpression_1":"Max(Year)-1","ValuesOrExpression_2":"","SelectionOperator":"equal_to"}]}

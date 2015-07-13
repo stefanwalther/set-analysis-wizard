@@ -1,0 +1,40 @@
+{
+  "name": "set-analysis-wizard",
+  "description": "The well known Set Analysis Wizard for QlikView and Qlik Sense.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/stefanwalther/set-analysis-wizard",
+  "author": {
+    "name": "Stefan Walther",
+    "url": "http://qliksite.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stefanwalther/set-analysis-wizard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stefanwalther/set-analysis-wizard/issues"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/stefanwalther/set-analysis-wizard/blob/master/LICENSE"
+  },
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "git://github.com/gulpjs/gulp#4.0",
+    "js-yaml": "^3.3.1",
+    "mocha": "*",
+    "should": "*",
+    "verb": "git://github.com/verbose/verb"
+  },
+  "keywords": []
+}

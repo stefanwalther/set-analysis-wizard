@@ -1,0 +1,2 @@
+﻿{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"bookmark","AggregationType":"Sum","FieldExpression":"Sales","Bookmark":"BM01","PersonalComment":"Calculate the sum of \"Sales\" based on the bookmark with the ID \"BM01\".","Expression":"Sum({BM01}Sales)","SetModifierActions":null}

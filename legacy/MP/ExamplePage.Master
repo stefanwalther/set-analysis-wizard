@@ -1,0 +1,71 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ExamplePage.master.cs" Inherits="qlikblog.Tools.SetAnalysisWizard.Web.MP.ExamplePage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="../library/css/main.css" rel="stylesheet" type="text/css" />
+    
+    <!-- jQuery -->
+    <script language="javascript" type="text/javascript" src="library/js/jquery-1.6.4.min.js"></script>
+
+    <!-- jQuery UI -->
+   <script language="javascript" type="text/javascript" src="library/js/jquery-ui-1.8.16.custom.min.js"></script>
+   <link rel="Stylesheet" type="text/css" href="../library/css/south-street/jquery-ui-1.8.16.custom.css" />
+   <link rel="Stylesheet" type="text/css" href="../library/css/graytheme/jquery-ui-1.8.16.custom.css" />
+
+    <!-- This is release mode -->
+    <link rel="Stylesheet" type="text/css" href="../library/css/StylesSheetFinal.css" />
+    <script language="javascript" type="text/javascript" src="library/js/JavaScriptFinal.js"></script>
+
+
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("a.lnkOpen").button();
+        });
+
+        $(document).ready(function () {
+
+            // this is perfect place to render the displaying of odd and even rows
+            $('#divExampleContainer .examplePage_Details div').removeClass('example_odd example_even'); //First remove all classes
+            // Then add them
+            $('#divExampleContainer .examplePage_Details:even div').addClass('example_even');
+            $('#divExampleContainer .examplePage_Details:odd div').addClass('example_odd');
+
+        }); // (document.ready()) 
+
+    </script>
+    <style type="text/css">
+    h2.examplePage
+    {
+        /* Overwrite the style */
+        margin-top:30px;
+        border-bottom-width:0px;
+    }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+         <!-- Header -->
+        <div id="divHeader">
+            <div id="divBack">
+                <a href="http://www.qlikblog.at">back to qlikblog.at</a>
+            </div>
+        
+        </div><br class="clearall" />
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+
+        <div id="divVersionInfoContainer" style="width:800px;color:#666;">
+            <div id="divVersionInfo" style="text-align:center;">
+                &copy; <a href="http://www.qlikblog.at">qlikblog.at</a>&nbsp;/&nbsp;<a href="http://www.qlikblog.at/about-me_stefan-walther/">Stefan Walther</a> <%=DateTime.Now.Year.ToString() %>&nbsp;~&nbsp; &quot;Set Analysis Wizard for QlikView" Version <%=qlikblog.Tools.SetAnalysisWizard.Web.Global.VersionInfo.GetVersionInfo()%>
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

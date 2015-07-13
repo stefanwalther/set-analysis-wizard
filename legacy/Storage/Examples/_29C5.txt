@@ -1,0 +1,2 @@
+{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"$","AggregationType":"Sum","FieldExpression":"Sales","Bookmark":"","PersonalComment":"Sum of Sales based on the current selection, but calculate only Sales for those years before the maximum year.","Expression":"Sum({$<Year={\"<$(=max(Year))\"}>}Sales)","QlikViewVersion":"100000","Version":"1.00.00","SetModifierActions":[{"Action":"set_modify_by_expression","Field":"Year","OtherField":"","FieldOperator":"=","ValuesOrExpression_1":"max(Year)","ValuesOrExpression_2":"","SelectionOperator":"less_than"}]}

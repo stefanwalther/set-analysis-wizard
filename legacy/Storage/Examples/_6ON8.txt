@@ -1,0 +1,2 @@
+{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"$-bookmark","SetIdentifierDesc":"the current selection except those records belonging to the bookmark with the Id '{0}'","AggregationType":"Sum","AggregationTypeDesc":"Sum","FieldExpression":"Sales","Bookmark":"Server\\BM01","PersonalComment":"Calculate the Sum of \"Sales\" based on the current selection except those records belonging to the bookmark with the Id 'Server\\BM01'","Expression":"Sum({$-Server\\BM01}Sales)","QlikViewVersion":"100000","PureDescription":"","Version":"0.5","SetModifierActions":[]}

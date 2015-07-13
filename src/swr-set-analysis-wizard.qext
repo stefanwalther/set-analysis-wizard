@@ -1,0 +1,9 @@
+{
+	"name" : "set-analysis-wizard",
+	"description" : "Use a wizard to create your Set Analysis statements.",
+	"icon" : "extension",
+	"type" : "visualization",
+	"version": "@@version",
+	"preview" : "set-analysis-wizard.png",
+	"author": "Stefan Walther"
+}

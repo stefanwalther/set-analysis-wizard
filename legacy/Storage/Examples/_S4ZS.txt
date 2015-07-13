@@ -1,0 +1,2 @@
+{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"bookmark","SetIdentifierDesc":"the bookmark with the Id '{0}'","AggregationType":"Sum","AggregationTypeDesc":"Sum","FieldExpression":"Sales","Bookmark":"Server\\BM01","PersonalComment":"Calculate the sum of sales based on the current selection AND the server-bookmark with the Id \"BM01\".","Expression":"Sum({Server\\BM01}Sales)","QlikViewVersion":"100000","PureDescription":"","Version":"0.5","SetModifierActions":[]}

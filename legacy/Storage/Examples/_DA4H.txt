@@ -1,0 +1,2 @@
+{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"$","AggregationType":"Sum","FieldExpression":"Sales","Bookmark":"","PersonalComment":"Return the Sum of Sales for all years greater than 2009.","Expression":"Sum({$<Year={\">2009\"}>}Sales)","QlikViewVersion":"100000","Version":"1.00.00","SetModifierActions":[{"Action":"set_modify_by_value","Field":"Year","OtherField":"","FieldOperator":"=","ValuesOrExpression_1":"2009","ValuesOrExpression_2":"","SelectionOperator":"greater_than"}]}

@@ -1,0 +1,2 @@
+﻿{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"$","AggregationType":"Sum","FieldExpression":"Sales","PersonalComment":"Calculate the sum of \"Sales\" (based on the current selection).","Expression":"Sum({$}Sales)","SetModifierActions":null}

@@ -1,0 +1,2 @@
+﻿{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"bookmark","AggregationType":"Avg","FieldExpression":"Sales","Bookmark":"Server\\BM01","PersonalComment":"Calculate the average of \"Sales\" based on the server bookmark with the id \"BM01\".","Expression":"Avg({Server\\BM01}Sales)","SetModifierActions":null}

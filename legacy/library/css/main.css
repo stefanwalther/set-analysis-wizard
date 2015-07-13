@@ -1,0 +1,93 @@
+﻿@charset "UTF-8";
+body
+{ 
+    font: 80% "Segoe UI", "Trebuchet MS", sans-serif; 
+    margin: 50px;
+    margin-top:0px;
+}
+
+h1
+{
+    font-size:1.5em;
+}
+
+h2
+{
+    color: #459e00;    
+    font-size:1.2em;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:#cccccc;
+}
+
+h3
+{
+    color: #459e00; 
+    font-size:1.0em;
+    border-bottom-style:dotted;
+    border-bottom-width:1px;
+    border-bottom-color:#cccccc;
+}
+
+hr, hr.hrSpacer
+{
+    margin-top:10px;
+    margin-bottom:10px;
+    height: 1px; 
+    color: #ccc; 
+    background-color: #ccc; 
+    border: none;
+}
+
+/* Links */
+a, a:link, a:active, a:visited
+{
+    color:#297ed3;
+    text-decoration:none;
+}
+a:hover 
+{
+    color:#1667b7;
+    text-decoration:underline;
+}
+/* End Links*/
+        
+
+label
+{
+    font-size:12px;
+}
+label.left
+{
+    width:130px;
+    margin-top:5px;
+    float:left;
+    font-weight:bold;
+}
+
+label.above
+{
+    display:block;
+}
+
+.clearall
+{
+    clear:all;    
+}
+
+.floatLeft
+{
+    float:left;    
+}
+.floatRight
+{
+    float:right;    
+}
+
+/*
+Buttons
+*/
+.styled_button {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
+.styled_button span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+	
+	

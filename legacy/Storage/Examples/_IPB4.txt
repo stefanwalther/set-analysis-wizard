@@ -1,0 +1,2 @@
+{C55490AB-93C9-4D80-BE14-88A19E115E61}
+{"SetIdentifier":"$","AggregationType":"Sum","FieldExpression":"Sales","Bookmark":"BM01","PersonalComment":"Returns the sales for current selection, but with the selection in \"Region\" removed.","Expression":"Sum({$<Region=>}Sales)","SetModifierActions":[{"Action":"set_remove","Field":"Region","FieldOperator":"=","ValuesOrExpression_1":"","ValuesOrExpression_2":"","SelectionOperator":"equal_to"}]}

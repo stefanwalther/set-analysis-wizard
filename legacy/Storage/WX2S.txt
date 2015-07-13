@@ -1,0 +1,2 @@
+35d3f9df-269a-4ab1-a55e-283e0f9a4485
+{"SetIdentifier":"$","SetIdentifierDesc":"the current selection","AggregationType":"Sum","AggregationTypeDesc":"Sum","FieldExpression":"Sales","Bookmark":"","PersonalComment":"Calculate the sum of \"Sales\" (based on the current selection).","Expression":"Sum({$}Sales)","QlikViewVersion":"100000","PureDescription":"","Version":"0.5","SetModifierActions":[]}

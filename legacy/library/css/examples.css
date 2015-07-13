@@ -1,0 +1,71 @@
+﻿h2.examplePage
+{
+    margin-top:0px;    
+}
+
+.examplePage_Details 
+{
+    display: table-row;  
+    height:80px; 
+    width:100%;  
+    margin-left:30px;
+}
+
+.example_Nr
+{
+    font-weight:bold;
+    font-size:150%;  
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:10px;
+    padding-right: 10px;
+    display:table-cell; 
+    vertical-align:middle;
+}
+.example_Desc
+{
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:5px;
+    padding-right: 5px;
+    display:table-cell;  
+    width:500px;
+}
+
+.example_Desc pre
+{
+    margin-left:25px;    
+}
+
+.example_Url
+{
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:15px;
+    padding-right: 15px;
+    display:table-cell;   
+    width:100px;
+    vertical-align:middle; 
+}
+
+.example_odd 
+{
+    background-color: #efefef;
+    border-top-width:1px;
+    border-top-color:#cccccc;
+    border-top-style:solid;
+}
+
+.example_even
+{
+    background-color:inherit; 
+    border-top-width:1px;
+    border-top-color:#cccccc;
+    border-top-style:solid;
+}
+
+.redBold
+{
+    font-weight:bold;
+    color:Red;   
+}

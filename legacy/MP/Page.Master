@@ -1,0 +1,114 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Page.master.cs" Inherits="qlikblog.Tools.SetAnalysisWizard.Web.MP.Page" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <!-- jQuery UI -->
+    <link rel="Stylesheet" type="text/css" href="../library/css/south-street/jquery-ui-1.8.16.custom.css" />
+    <link rel="Stylesheet" type="text/css" href="../library/css/graytheme/jquery-ui-1.8.16.custom.css" />
+
+<%
+#if(DEBUG)
+%>
+
+    <!-- Already optimized files  -->
+    
+    <!-- Javascript Files - minimized -->
+    <script language="javascript" type="text/javascript" src="library/js/jquery-1.6.4.min.js"></script>
+    
+    <!-- jQuery UI -->
+    <script language="javascript" type="text/javascript" src="library/js/jquery-ui-1.8.16.custom.min.js"></script>
+
+    <!-- jQuery - QTip 2 -->
+    <script type="text/javascript" src="library/js/jquery.qtip.min.js"></script>		
+	<link type="text/css" rel="stylesheet" href="../library/css/jquery.qtip.min.css"/>
+
+    <!-- ********************************************************************************************* -->
+    <!-- This is Debug Mode -->
+
+    <!-- Style Sheets -->
+    <link rel="Stylesheet" type="text/css" href="../library/css/forms.css" />
+    <link rel="Stylesheet" type="text/css" href="../library/css/main.css" />
+    <link rel="Stylesheet" type="text/css" href="../library/css/SetAnalysisWizard.css" />
+    <link rel="stylesheet" type="text/css" href="../library/css/examples.css" />
+
+    
+    <!-- JavaScript Files -->
+    <script language="javascript" type="text/javascript" src="library/js/swr_StringUtils.js"></script>
+    <script language="javascript" type="text/javascript" src="library/js/swr_NumUtils.js"></script>
+
+
+   <!-- jQuery CustomInput-->
+   <script language="javascript" type="text/javascript" src="library/js/customInput.jquery.js"></script>
+   <link rel="Stylesheet" type="text/css" href="../library/css/customInput.jquery.css" />
+
+    <!-- jQuery BlockUI -->
+    <script language="javascript" type="text/javascript" src="library/js/jquery.blockUI.js"></script>
+
+    <!-- Set Analysis Wizard -->
+    <script language="javascript" type="text/javascript" src="library/js/SetAnalysisWizard_ServerStorage.js"></script>
+    <script language="javascript" type="text/javascript" src="library/js/SetAnalysisDefinition.js"></script>
+    <script language="javascript" type="text/javascript" src="library/js/SetModifierAction.js"></script>    
+    <script language="javascript" type="text/javascript" src="library/js/SetAnalysisWizard.js"></script>
+    <script language="javascript" type="text/javascript" src="library/js/SetAnalysisDefinition.js"></script>
+    <script language="javascript" type="text/javascript" src="library/js/SetAnalysisWizard_UI.js"></script>
+    <script language="javascript" type="text/javascript" src="library/js/SetAnalysisWizard_Utils.js"></script>
+    <script language="javascript" type="text/javascript" src="library/js/SetAnalysisWizard_HideDebugTab.js"></script>
+
+    
+
+
+
+    <!-- ********************************************************************************************* -->
+
+      <!-- jQuery Plugins -->
+    <!--<script language="javascript" type="text/javascript" src="library/js/jquery.tinywatermark-3.1.0.min.js"></script>-->
+
+    
+
+    <!-- Syntax Highlighter -->
+    <!--
+    <script type="text/javascript" src="library/js/syntaxhighlighter/2_1_364/shCore.js"></script>
+	<script type="text/javascript" src="library/js/syntaxhighlighter/2_1_364/shLegacy.js"></script>
+	<script type="text/javascript" src="library/js/syntaxhighlighter/2_1_364/shBrushJScript.js"></script>
+	<script type="text/javascript" src="library/js/syntaxhighlighter/shBrushQlikViewScript.js"></script>		
+	<link type="text/css" rel="stylesheet" href="../library/css/syntaxhighlighter/2_1_364/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../library/css/syntaxhighlighter/2_1_364/shThemeDefault.css"/>
+    -->
+
+<%
+#else
+%>
+    <!-- ********************************************************************************************* -->
+    <!-- This is release mode -->
+    <link rel="Stylesheet" type="text/css" href="../library/css/StylesSheetFinal.css" />
+    <script language="javascript" type="text/javascript" src="library/js/JavaScriptFinal.js"></script>
+
+<%
+#endif
+%>
+
+    
+    
+
+     <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    
+</head>
+<body>
+    <form id="form1" runat="server">
+        
+        
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">        
+        </asp:ContentPlaceHolder>
+
+        <br />
+        <div id="divVersionInfoContainer" style="width:1000px;color:#666;">
+            <div id="divVersionInfo" style="text-align:center;">
+                &copy; <a href="http://www.qlikblog.at">qlikblog.at</a>&nbsp;/&nbsp;<a href="http://www.qlikblog.at/about-me_stefan-walther/">Stefan Walther</a> <%=DateTime.Now.Year.ToString() %>&nbsp;~&nbsp;&quot;Set Analysis Wizard for QlikView&quot; - Version <%=qlikblog.Tools.SetAnalysisWizard.Web.Global.VersionInfo.GetVersionInfo()%>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

@@ -14,25 +14,29 @@ describe.only( 'Parser', () => {
 
 	describe( 'parses ...', () => {
 
-		it( 'SUM(Sales)', function ( ) {
-			var r = parser.parse('SUM(Sales)');
-			expect( r ).to.equal( 'SUM(Sales)' );
+		it( 'SUM(bar)', function ( ) {
+			var r = parser.parse('SUM(bar)');
+			expect( r ).to.equal( 'SUM(bar)' );
 		} );
-		it( 'Sum(Sales)', function ( ) {
-			var r = parser.parse('Sum(Sales)');
-			expect( r ).to.equal( 'Sum(Sales)' );
+		it( 'Sum(bar)', function ( ) {
+			var r = parser.parse('Sum(bar)');
+			expect( r ).to.equal( 'Sum(bar)' );
 		} );
-		it( 'Sum({$}Sales)', function ( ) {
-			var r = parser.parse('Sum({$}Sales)');
-			expect( r ).to.equal( 'Sum({$}Sales)' );
+		it( 'Sum({$}bar)', function ( ) {
+			var r = parser.parse('Sum({$}bar)');
+			expect( r ).to.equal( 'Sum({$}bar)' );
 		} );
-		it( 'Sum({1}Sales)', function ( ) {
-			var r = parser.parse('Sum({1}Sales)');
-			expect( r ).to.equal( 'Sum({1}Sales)' );
+		it( 'Sum({1}bar)', function ( ) {
+			var r = parser.parse('Sum({1}bar)');
+			expect( r ).to.equal( 'Sum({1}bar)' );
 		} );
-		it( 'Sum({1<bla>}Sales)', function ( ) {
-			var r = parser.parse('Sum({1<>}Sales)');
-			expect( r ).to.equal( 'Sum({1<>}Sales)' );
+		it( 'Sum({1<foo>}bar)', function ( ) {
+			var r = parser.parse('Sum({1<foo>}bar)');
+			expect( r ).to.equal( 'Sum({1<foo>}bar)' );
+		} );
+		it( 'Sum({1<Year=foo>}bar)', function ( ) {
+			var r = parser.parse('Sum({1<Year=foo>}bar)');
+			expect( r ).to.equal( 'Sum({1<Year=foo>}bar)' );
 		} );
 
 

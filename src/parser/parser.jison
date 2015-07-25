@@ -1,7 +1,10 @@
 /*
+http://nolanlawson.github.io/jison-debugger/
+http://www.lysator.liu.se/(nobg)/c/ANSI-C-grammar-y.html
 http://stackoverflow.com/questions/24397160/jison-google-like-parser
 http://stackoverflow.com/questions/27056486/error-handling-in-jison
 http://stackoverflow.com/questions/26899381/jison-getting-parsed-token-instead-of-what-is-defined-in-grammar
+https://regex101.com/
 */
 
 /*
@@ -25,17 +28,18 @@ http://stackoverflow.com/questions/26899381/jison-getting-parsed-token-instead-o
 %lex
 %options flex case-insensitive
 
-aggr_type_list                  ("Sum"|"Min"|"Max"|"Only"|"Mode"|"FirstSortedValue")
-set_identifier_list             ("1"|"$"|"$N"|"$_N")
-set_operatora                   ("+"|"-"|"*"|"/")
+aggr_types                      ("Sum"|"Min"|"Max"|"Only"|"Mode"|"FirstSortedValue"|"MinString"|"MaxString"|"Concat"| "Count"|"NumericCount"|"TextCount"|"NullCount"|"MissingCount"|"Avg"|"stdev"|"median"|"fractile"|"skew"|"kurtosis"|"correl"|"sterr"|"steyx"|"linest_m"|"linest_b"|"linest_r2"|"linest_sem"|"linest_seb"|"linest_sey"|"linest_df"|"linest_f"|"linest_ssreg"|"linest_ssresid")
+//set_identifiers                 (\$[1-9]|\$_[1-9]|\$|[1])
+//set_operators                   ("+"|"-"|"*"|"/")
 field_selection_operators       ("="|"+="|"-="|"*="|"/=")
 
 %%
 
 \s+                             /* skip whitespace */
-{aggr_type_list}                return 'aggr_type';
-{set_identifier_list}           return 'set_identifier';
-{set_operators}                 return 'set_operator';
+{aggr_types}                    return 'aggr_type';
+//{set_operators}                 return 'set_operator';
+// https://regex101.com/r/dF4hX4/5
+\$[1-9]|\$_[1-9]|^\$|1-\$|[1]{1}|^[1]_\$$|[\$]       return 'set_identifier';
 {field_selection_operators}     return 'field_selection_operator';
 \w+                             return "field_expression";
 "{"                             return 'curly_open';
@@ -65,6 +69,25 @@ definition
     | aggr_type par_open set_expression field_expression par_close
         {$$ = $1 + $2 + $3 + $4 + $5;}
     ;
+
+// set_operator ::= + | - | * | /
+set_operator
+    : '+'
+        {$$ = $1;}
+/*    | '-'
+        {$$ = $1;}*/
+    | '*'
+        {$$ = $1;}
+    | '/'
+        {$$ = $1;}
+    ;
+
+/*
+set_identifier
+    : '$'
+        {$$ = $1;}
+    ;
+*/
 
 set_expression
     // {..}

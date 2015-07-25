@@ -16,7 +16,7 @@ https://regex101.com/
  * set_identifier ::= 1 | $ | $N | $_N | bookmark_id | bookmark_name
  * set_operator ::= + | - | * | /
  * set_modifier ::= < field_selection {, field_selection } >
- * field_selection ::= field_name [ = | += | ¬–= | *= | /= ] element_set_expression
+ * field_selection ::= field_name [ = | += | Â¬â€“= | *= | /= ] element_set_expression
  * element_set_expression ::= element_set { set_operator element_set }
  * element_set ::= [ field_name ] | { element_list } | element_function
  * element_list ::= element { , element }
@@ -38,7 +38,7 @@ field_selection_operators       ("="|"+="|"-="|"*="|"/=")
 \s+                             /* skip whitespace */
 {aggr_types}                    return 'aggr_type';
 //{set_operators}                 return 'set_operator';
-// https://regex101.com/r/dF4hX4/5
+// https://regex101.com/r/dF4hX4/6
 \$[1-9]|\$_[1-9]|^\$|1-\$|[1]{1}|^[1]_\$$|[\$]       return 'set_identifier';
 {field_selection_operators}     return 'field_selection_operator';
 \w+                             return "field_expression";
@@ -113,7 +113,7 @@ set_modifier
         { $$ = '<' + $2 + '>'; }
     ;
 
-//  field_selection ::= field_name [ = | += | ¬–= | *= | /= ] element_set_expression
+//  field_selection ::= field_name [ = | += | Â¬â€“= | *= | /= ] element_set_expression
 field_selection
     : field_expression
         { $$ = $1; }

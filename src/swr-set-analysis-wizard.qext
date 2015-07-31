@@ -4,6 +4,6 @@
 	"icon" : "extension",
 	"type" : "visualization",
 	"version": "@@version",
-	"preview" : "set-analysis-wizard.png",
+	"preview" : "swr-set-analysis-wizard.png",
 	"author": "Stefan Walther"
 }

@@ -1,5 +1,7 @@
 # set-analysis-wizard
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/stefanwalther/set-analysis-wizard.svg)](https://greenkeeper.io/)
+
 > The well known Set Analysis Wizard for QlikView and Qlik Sense.
 
 <!-- toc -->

@@ -1,0 +1,9 @@
+{
+  "SetIdentifier": "$",
+  "AggregationType": "Count",
+  "FieldExpression": "Customer",
+  "Bookmark": "",
+  "PersonalComment": "Count values of field \"Customer\" based on the current selection",
+  "Expression": "Count({$}Customer)",
+  "SetModifierActions": null
+}

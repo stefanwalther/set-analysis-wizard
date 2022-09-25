@@ -1,0 +1,41 @@
+.example-item--container:nth-child(1) {
+  border-top-color: #ccc;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.example-item--container {
+  border-bottom-color: #ccc;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding: 1em;
+
+  &:hover {
+    background-color: #cff1cf;
+  }
+
+  .number--container {
+    .number {
+      color: rgba(84, 86, 87, 0.43);
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+  .button--container {
+    .button-open {
+    }
+  }
+
+  .content--container {
+    text-align: left;
+
+    .formattedTitle {
+
+    }
+    .expression--container {
+      margin-top: 1em;
+      margin-left: 1em;
+    }
+  }
+
+}

@@ -1,116 +1,30 @@
 # =========================
 # Project specific
 # =========================
-[Rr]esources/
-[Tt]ests/
-web.*.config
-/dist_dev/
-/**/node_modules/
-/**/bower_components/
-/build/*_dev.zip
-.tmp/
-/out/
-
+coverage/
 
 # =========================
-# Visual Studio
-# =========================
-#https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
-
-# User-specific files
-*.suo
-*.user
-*.sln.docstates
-
-# Build results
-
-[Dd]ebug/
-[Rr]elease/
-x64/
-[Bb]in/
-[Oo]bj/
-
-# MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-
-# Visual Studio profiler
-*.psess
-*.vsp
-*.vspx
-
-*_i.c
-*_p.c
-*.ilk
-*.meta
-*.obj
-*.pch
-*.pdb
-*.pgc
-*.pgd
-*.rsp
-*.sbr
-*.tlb
-*.tli
-*.tlh
-*.tmp
-*.tmp_proj
-*.log
-*.vspscc
-*.vssscc
-.builds
-*.pidb
-*.scc
-
-
-# Click-Once directory
-publish/
-
-# Publish Web Output
-*.Publish.xml
-*.pubxml
-
-# Others
-sql/
-*.Cache
-ClientBin/
-[Ss]tyle[Cc]op.*
-~$*
-*~
-*.dbmdl
-*.[Pp]ublish.xml
-*.pfx
-*.publishsettings
-
-# Backup & report files from converting an old project file to a newer
-# Visual Studio version. Backup files are not needed, because we have git ;-)
-_UpgradeReport_Files/
-Backup*/
-UpgradeLog*.XML
-UpgradeLog*.htm
-
-# SQL Server files
-App_Data/*.mdf
-App_Data/*.ldf
-
-# =========================
-# Webstorm
-# =========================
-.idea/
-
-# =========================
-# Windows detritus
+# IDEs
 # =========================
 
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+# IntelliJ / Webstorm
+# Solution according to
+#   - https://stackoverflow.com/questions/11968531/what-to-gitignore-from-the-idea-folder
+#   - https://intellij-support.jetbrains.com/hc/en-us/articles/206544839-How-to-manage-projects-under-Version-Control-Systems
+**/.idea/workspace.xml
+**/.idea/tasks.xml
 
-# Folder config file
-Desktop.ini
+# Visual Code
+.vscode/
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# =========================
+# node.js
+# =========================
+node_modules/
 
-# Mac crap
-.DS_Store
+# =========================
+# npm
+# =========================
+package-lock.json
+npm-debug.log
+*/.npm

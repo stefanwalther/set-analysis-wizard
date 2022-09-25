@@ -1,0 +1,30 @@
+# =========================
+# Project specific
+# =========================
+coverage/
+
+# =========================
+# IDEs
+# =========================
+
+# IntelliJ / Webstorm
+# Solution according to
+#   - https://stackoverflow.com/questions/11968531/what-to-gitignore-from-the-idea-folder
+#   - https://intellij-support.jetbrains.com/hc/en-us/articles/206544839-How-to-manage-projects-under-Version-Control-Systems
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+
+# Visual Code
+.vscode/
+
+# =========================
+# node.js
+# =========================
+node_modules/
+
+# =========================
+# npm
+# =========================
+package-lock.json
+npm-debug.log
+*/.npm

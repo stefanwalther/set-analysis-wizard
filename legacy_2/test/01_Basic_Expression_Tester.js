@@ -1,4 +1,4 @@
-import { SetAnalysisDefinition } from "../legacy_2/SetAnalysisDefinition";
+import { SetAnalysisDefinition } from "../SetAnalysisDefinition";
 
 describe( 'Basic Expression Tester', () => {
 

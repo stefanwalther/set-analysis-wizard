@@ -6,10 +6,10 @@ interface Props {
   nr: number;
   formattedTitle: string;
   expression: string;
-  key: string;
+  itemKey: string;
 }
 
-const ExampleItem: React.FC<Props> = ({nr, formattedTitle, expression, key}: Props) => {
+const ExampleItem: React.FC<Props> = ({nr, formattedTitle, expression, itemKey}: Props) => {
   return (
     <Grid className='example-item--container'>
       <Grid.Col span={1} className='number--container'>

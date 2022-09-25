@@ -1,13 +1,22 @@
 import React from 'react';
+import {Grid, Textarea} from "@mantine/core";
 
-interface Props {}
-const Step3: React.FC<Props> = (props) => {
+interface Props {
+  result: string;
+}
+
+const Step3: React.FC<Props> = ({result}: Props) => {
   return (
     <>
-
-      The result
-      The result
-
+      <Grid>
+        <Grid.Col>
+          <Textarea
+            variant='default'
+            value={result}
+            minRows={10}
+          ></Textarea>
+        </Grid.Col>
+      </Grid>
     </>
   );
 }

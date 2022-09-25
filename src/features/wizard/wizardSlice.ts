@@ -23,7 +23,7 @@ const initialState: WizardState = {
 }
 
 export const wizardSlice = createSlice({
-  name: 'ui',
+  name: 'wizard',
   initialState,
   reducers: {
     getWizardState: (state:WizardState) => {
@@ -41,13 +41,47 @@ export const wizardSlice = createSlice({
       state.currentWizardStep = action.payload;
       return state;
     },
+    setValueSetIdentifier: (state: WizardState, action: PayloadAction<string>) => {
+      state.value.SetIdentifier = action.payload;
+      return state;
+    },
+    setValueAggregationType: (state: WizardState, action: PayloadAction<string>) => {
+      state.value.AggregationType = action.payload;
+      return state;
+    },
+    setValueFieldExpression: (state: WizardState, action: PayloadAction<string>) => {
+      state.value.FieldExpression = action.payload;
+      return state;
+    },
+    setValuePersonalComment: (state: WizardState, action: PayloadAction<string>) => {
+      state.value.PersonalComment = action.payload;
+      return state;
+    }
 
   }
 });
 
-export const {getWizardState,setCurrentWizardStep, getInitialSetIdentifierGroups, getInitialAggregationTypeGroups} = wizardSlice.actions;
+export const {
+  getWizardState,
+  setCurrentWizardStep,
+  getInitialSetIdentifierGroups,
+  getInitialAggregationTypeGroups,
+
+  setValueSetIdentifier,
+  setValueAggregationType,
+  setValueFieldExpression,
+  setValuePersonalComment
+
+} = wizardSlice.actions;
 export default wizardSlice.reducer;
 
 export const selectCurrentWizardStep = (state: RootState): number => state.wizard.currentWizardStep;
 export const selectSetIdentifierGroups = (state: RootState): ISetIdentifierGroup[] => state.wizard.setIdentifierGroups;
 export const selectAggregationTypeGroups = (state: RootState): IAggregationTypeGroup[] => state.wizard.aggregationTypeGroups;
+export const selectWizardValue = (state: RootState): IWizardValue => state.wizard.value;
+
+// Values & Set Values
+export const selectValueSetIdentifier = (state: RootState): string => state.wizard.value.SetIdentifier;
+export const selectValueAggregationType = (state: RootState): string => state.wizard.value.AggregationType;
+export const selectValueFieldExpression = (state: RootState): string => state.wizard.value.FieldExpression;
+export const selectValuePersonalComment = (state: RootState): string => state.wizard.value.PersonalComment ?? '';

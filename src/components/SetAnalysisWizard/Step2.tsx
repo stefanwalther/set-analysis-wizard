@@ -1,6 +1,6 @@
 import React from 'react';
-import {ScrollArea, Table, ActionIcon} from "@mantine/core";
-import {IconAlphabetLatin, IconPencil, IconTrash} from "@tabler/icons";
+import {Button, ScrollArea, Table, ActionIcon} from "@mantine/core";
+import {IconAlphabetLatin, IconCirclePlus, IconPencil, IconTrash} from "@tabler/icons";
 
 interface Props {}
 const Step2: React.FC<Props> = (props) => {
@@ -8,8 +8,6 @@ const Step2: React.FC<Props> = (props) => {
   interface IActionProps  {
     index: number;
     description: string;
-
-
   }
 
   const elements = [
@@ -27,8 +25,8 @@ const Step2: React.FC<Props> = (props) => {
     { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
   ];
 
-  const rows = elements.map((element) => (
-    <tr key={element.name}>
+  const rows = elements.map((element, index) => (
+    <tr key={index.toString()}>
       <td>{element.position}</td>
       <td>{element.name}</td>
       <td>{element.symbol}</td>
@@ -40,8 +38,20 @@ const Step2: React.FC<Props> = (props) => {
     </tr>
   ));
 
+  const handleClickAdd = () => {
+    console.log('Add modifier');
+  }
+  const handleClickDeleteAll = () => {
+    console.log('Delete all');
+  };
   return (
     <div>
+
+      <Button leftIcon={<IconTrash />} variant="filled" color="red" onClick={handleClickDeleteAll}>Delete all modifiers</Button>
+      <Button leftIcon={<IconCirclePlus />} onClick={handleClickAdd}>
+        Add modifier
+      </Button>
+
     <ScrollArea type='auto' style={{ height: 300, backgroundColor: '#fff', borderColor: '#ccc', borderStyle: 'solid', borderWidth: 1 }} >
       <Table striped highlightOnHover>
         <thead>

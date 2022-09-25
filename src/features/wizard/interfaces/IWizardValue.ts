@@ -4,8 +4,7 @@ export interface IWizardValue extends ISetAnalysisDefinitionProps {
 }
 
 export const InitialWizardValue: IWizardValue = {
-  SetIdentifier: "",
-  AggregationType: "",
   FieldExpression: "",
-  Bookmark: "",
+  SetIdentifier: "",
+  AggregationType: ""
 }

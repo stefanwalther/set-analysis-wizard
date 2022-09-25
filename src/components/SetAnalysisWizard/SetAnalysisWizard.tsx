@@ -1,5 +1,5 @@
 import React from 'react';
-import SAWStepper from "./SAWStepper";
+import SawStepper from "./SawStepper";
 
 interface Props {
 }
@@ -7,7 +7,7 @@ interface Props {
 const SetAnalysisWizard: React.FC<Props> = (props) => {
   return (
     <div>
-      <SAWStepper></SAWStepper>
+      <SawStepper></SawStepper>
     </div>
   )
 }

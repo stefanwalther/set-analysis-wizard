@@ -1,7 +1,12 @@
 import React from 'react';
 import {Stepper} from '@mantine/core';
 import { useAppSelector, useAppDispatch } from '../../common/hooks';
-import {selectCurrentWizardStep, setCurrentWizardStep} from '../../features/wizard/wizardSlice';
+import {
+  selectCurrentWizardStep,
+  selectValueSetIdentifier,
+  selectWizardValue,
+  setCurrentWizardStep
+} from '../../features/wizard/wizardSlice';
 import Step3 from "./Step3";
 import Step2 from "./Step2";
 import Step1 from "./Step1";
@@ -9,22 +14,15 @@ import Step1 from "./Step1";
 interface Props {
 }
 
-const SAWStepper: React.FC<Props> = (props) => {
+const SawStepper: React.FC<Props> = (props) => {
 
   const currentStep = useAppSelector(selectCurrentWizardStep);
+  const wizardValue = useAppSelector(selectWizardValue);
+
   const dispatch = useAppDispatch();
 
   const handleStep = (stepIndex: number) => {
-
-    console.log('stepIndex', stepIndex);
-    console.log('currentStep', currentStep);
-
-    console.log('change it');
     dispatch(setCurrentWizardStep(stepIndex));
-
-    console.log('stepIndex', stepIndex);
-    console.log('currentStep', currentStep);
-
   }
 
   return (
@@ -37,10 +35,10 @@ const SAWStepper: React.FC<Props> = (props) => {
           <Step2 />
         </Stepper.Step>
         <Stepper.Step label='Get the Output' description='Retrieve the output'>
-          <Step3 />
+          <Step3 result={wizardValue.PureDescription ?? ''} />
         </Stepper.Step>
       </Stepper>
     </>
   )
 }
-export default SAWStepper;
+export default SawStepper;

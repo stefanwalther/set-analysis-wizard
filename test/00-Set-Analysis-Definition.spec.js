@@ -1,4 +1,4 @@
-import { SetAnalysisDefinition } from "../model/SetAnalysisDefinition";
+import { SetAnalysisDefinition } from "../legacy_2/SetAnalysisDefinition";
 
 describe( 'Set Analysis Definition', () => {
 

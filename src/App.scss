@@ -7,6 +7,27 @@
   pointer-events: none;
 }
 
+.app-navheader {
+
+}
+
+.app-container {
+  size: 960px;
+  height: calc(100vh - 56px);
+  background-color: #fafafa;
+  border-left-width: 1px;
+  border-left-color: #ccc;
+  border-left-style: solid;
+  border-right-width: 1px;
+  border-right-color: #ccc;
+  border-right-style: solid;
+  text-align: left;
+}
+
+.app-footer {
+
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

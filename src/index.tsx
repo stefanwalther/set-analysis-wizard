@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {MantineProvider} from '@mantine/core';
@@ -10,7 +10,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+      withCSSVariables
+    >
       <App/>
     </MantineProvider>
   </React.StrictMode>

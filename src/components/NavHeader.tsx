@@ -2,6 +2,10 @@ import {createStyles, Header, Menu, Group, Center, Burger, Container} from '@man
 import {useDisclosure} from '@mantine/hooks';
 import {IconChevronDown} from '@tabler/icons';
 import Logo from "./Logo";
+import {
+  Link,
+  useNavigate,
+} from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -44,16 +48,21 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderSearchProps {
-  links: { link: string; label: string; links?: { link: string; label: string }[] }[];
+  links: { key: string, route: string; label: string; links?: { key: string, route: string; label: string }[] }[];
 }
 
 export function NavHeader({links}: HeaderSearchProps) {
+
   const [opened, {toggle}] = useDisclosure(false);
   const {classes} = useStyles();
+  const navigate = useNavigate();
 
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.link}>{item.label}</Menu.Item>
+      <Menu.Item key={item.route} onClick={(e: any) => {
+        console.log('clicked 2');
+        e.preventDefault();
+      }}>{item.label}</Menu.Item>
     ));
 
     if (menuItems) {
@@ -61,9 +70,12 @@ export function NavHeader({links}: HeaderSearchProps) {
         <Menu key={link.label} trigger="hover" exitTransitionDuration={0}>
           <Menu.Target>
             <a
-              href={link.link}
+              href={link.route}
               className={classes.link}
-              onClick={(event) => event.preventDefault()}
+              onClick={(event) => {
+                navigate(link.route);
+                event.preventDefault();
+              }}
             >
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
@@ -78,10 +90,13 @@ export function NavHeader({links}: HeaderSearchProps) {
 
     return (
       <a
-        key={link.label}
-        href={link.link}
+        key={link.key}
+        href={link.route}
         className={classes.link}
-        onClick={(event) => event.preventDefault()}
+        onClick={(event) => {
+          event.preventDefault();
+          navigate(link.route);
+        }}
       >
         {link.label}
       </a>
@@ -89,7 +104,7 @@ export function NavHeader({links}: HeaderSearchProps) {
   });
 
   return (
-    <Header height={56} mb={120} style={{backgroundColor: '#efefef'}}>
+    <Header height={56} style={{backgroundColor: 'steelblue'}}>
       <Container>
         <div className={classes.inner}>
           <Group>

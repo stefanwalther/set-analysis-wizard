@@ -4,19 +4,24 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {MantineProvider} from '@mantine/core';
+import { Provider } from 'react-redux';
+
+import { store } from './state';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      withCSSVariables
-    >
-      <App/>
-    </MantineProvider>
+    <Provider store={store}>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        withCSSVariables
+      >
+        <App/>
+      </MantineProvider>
+    </Provider>
   </React.StrictMode>
 );
 

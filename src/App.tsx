@@ -3,14 +3,20 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import './App.scss';
 import {NavHeader} from "./components/NavHeader";
-import {Container} from "@mantine/core";
+import {Affix, Container} from "@mantine/core";
 import NavFooter from "./components/NavFooter";
 import Home from "./pages/Home";
 import Examples from "./pages/Examples";
 import About from "./pages/About";
 import Help from "./pages/Help";
+import Start from "./pages/Start";
 
 const NAV_LINKS = [
+  {
+    key: 'start',
+    route: '/start',
+    label: 'Start'
+  },
   {
     key: 'help',
     route: '/help',
@@ -46,6 +52,7 @@ function App() {
             <Route path='/about' element={<About/>}/>
             <Route path='/help' element={<Help/>}/>
             <Route path='/examples' element={<Examples/>}/>
+            <Route path='/start' element={<Start />} />
           </Routes>
         </Container>
       </div>

@@ -44,7 +44,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint \"{src,test}/**/*.ts\" ",
+    "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -65,6 +67,19 @@
     ]
   },
   "devDependencies": {
-    "@types/react-dom": "^18.0.6"
+    "@types/react-dom": "^18.0.6",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  },
+  "lint-staged": {
+    "linters": {
+      "src/*.{ts,tsx,js,jsx,css,scss,md}": [
+        "prettier --trailing-comma es5 --single-quote --write",
+        "git add"
+      ],
+      "ignore": [
+        "**/dist/*, **/node_modules/*"
+      ]
+    }
   }
 }

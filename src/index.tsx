@@ -4,9 +4,10 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {MantineProvider} from '@mantine/core';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
+import {ModalsProvider} from '@mantine/modals';
 
-import { store } from './state';
+import {store} from './state';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,7 +20,9 @@ root.render(
         withNormalizeCSS
         withCSSVariables
       >
-        <App/>
+        <ModalsProvider>
+          <App/>
+        </ModalsProvider>
       </MantineProvider>
     </Provider>
   </React.StrictMode>

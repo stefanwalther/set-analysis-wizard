@@ -1,9 +1,12 @@
 import React from 'react';
-import {Button, ScrollArea, Table, ActionIcon} from "@mantine/core";
+import {useState} from 'react';
+import {Button, ScrollArea, Table, ActionIcon, Modal} from "@mantine/core";
 import {IconAlphabetLatin, IconCirclePlus, IconPencil, IconTrash} from "@tabler/icons";
 
 interface Props {}
 const Step2: React.FC<Props> = (props) => {
+
+  const [modalOpened, setModalOpened] = useState(false);
 
   interface IActionProps  {
     index: number;
@@ -40,10 +43,13 @@ const Step2: React.FC<Props> = (props) => {
 
   const handleClickAdd = () => {
     console.log('Add modifier');
+    setModalOpened(true);
+
   }
   const handleClickDeleteAll = () => {
     console.log('Delete all');
   };
+
   return (
     <div>
 
@@ -51,6 +57,12 @@ const Step2: React.FC<Props> = (props) => {
       <Button leftIcon={<IconCirclePlus />} onClick={handleClickAdd}>
         Add modifier
       </Button>
+
+      <Modal
+        opened={modalOpened}
+        onClose={() => setModalOpened(false)}
+        title={'Hallo'}
+      ></Modal>
 
     <ScrollArea type='auto' style={{ height: 300, backgroundColor: '#fff', borderColor: '#ccc', borderStyle: 'solid', borderWidth: 1 }} >
       <Table striped highlightOnHover>

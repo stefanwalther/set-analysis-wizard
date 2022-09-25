@@ -1,6 +1,6 @@
-import { createStyles, Header, Menu, Group, Center, Burger, Container } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconChevronDown } from '@tabler/icons';
+import {createStyles, Header, Menu, Group, Center, Burger, Container} from '@mantine/core';
+import {useDisclosure} from '@mantine/hooks';
+import {IconChevronDown} from '@tabler/icons';
 import Logo from "./Logo";
 
 const useStyles = createStyles((theme) => ({
@@ -44,12 +44,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderSearchProps {
-  links: { link: string; label: string; links: { link: string; label: string }[] }[];
+  links: { link: string; label: string; links?: { link: string; label: string }[] }[];
 }
 
-export function HeaderMenu({ links }: HeaderSearchProps) {
-  const [opened, { toggle }] = useDisclosure(false);
-  const { classes } = useStyles();
+export function NavHeader({links}: HeaderSearchProps) {
+  const [opened, {toggle}] = useDisclosure(false);
+  const {classes} = useStyles();
 
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
@@ -67,7 +67,7 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
             >
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
-                <IconChevronDown size={12} stroke={1.5} />
+                <IconChevronDown size={12} stroke={1.5}/>
               </Center>
             </a>
           </Menu.Target>
@@ -89,14 +89,20 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
   });
 
   return (
-    <Header height={56} mb={120}>
+    <Header height={56} mb={120} style={{backgroundColor: '#efefef'}}>
       <Container>
         <div className={classes.inner}>
-          <Logo />
+          <Group>
+            <div>
+              <span style={{paddingRight: 0, marginRight: 0, fontWeight: "bold"}}>Set Analysis Wizard</span><sup
+              style={{marginLeft: 0, paddingLeft: 0, color: "darkgray"}}>v2</sup>
+              <Logo/>
+            </div>
+          </Group>
           <Group spacing={5} className={classes.links}>
             {items}
           </Group>
-          <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
+          <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm"/>
         </div>
       </Container>
     </Header>

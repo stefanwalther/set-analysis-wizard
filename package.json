@@ -14,10 +14,7 @@
   "bugs": {
     "url": "https://github.com/stefanwalther/set-analysis-wizard/issues"
   },
-  "license": {
-    "type": "GNU General Public License",
-    "url": "https://github.com/stefanwalther/set-analysis-wizard/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "files": [
     "index.js"
   ],
@@ -26,27 +23,10 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha --require ./test/global.js --compilers js:babel/register"
   },
   "dependencies": {
-    "lodash": "^3.10.0"
   },
   "devDependencies": {
-    "babel": "^5.6.14",
-    "chai": "^3.0.0",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.1.0",
-    "gulp-jison": "^1.2.0",
-    "gulp-sourcemaps": "^1.5.2",
-    "js-yaml": "^3.3.1",
-    "lex-parser": "^0.1.4",
-    "ebnf-parser": "^0.1.10",
-    "jison": "^0.4.15",
-    "mocha": "*",
-    "should": "*",
-    "sinon": "^1.15.4",
-    "sinon-chai": "^2.8.0",
-    "verb": "git://github.com/verbose/verb"
   },
   "keywords": []
 }

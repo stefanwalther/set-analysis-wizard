@@ -607,7 +607,7 @@ jQuery.extend({
 			// A fallback to window.onload, that will always work
 			window.addEventListener( "load", jQuery.ready, false );
 
-		// If IE event model is used
+		// If IE event legacy_2 is used
 		} else if ( document.attachEvent ) {
 			// ensure firing before onload,
 			// maybe late but safe also for iframes
@@ -1263,7 +1263,7 @@ function now() {
 	//	// WebKit doesn't clone checked state correctly in fragments
 	//	jQuery.support.checkClone = fragment.cloneNode(true).cloneNode(true).lastChild.checked;
 
-	//	// Figure out if the W3C box model works as expected
+	//	// Figure out if the W3C box legacy_2 works as expected
 	//	// document.body must exist before we can do this
 	//	jQuery(function() {
 	//		var div = document.createElement("div");

@@ -3,10 +3,6 @@ import {Grid, Button, TextInput, Divider, Textarea} from '@mantine/core';
 import {useAppDispatch, useAppSelector} from "../../common/hooks";
 import {
   setCurrentWizardStep,
-  selectSetIdentifierGroups,
-  getInitialSetIdentifierGroups,
-  getInitialAggregationTypeGroups,
-  selectAggregationTypeGroups,
   selectValueSetIdentifier,
   setValueSetIdentifier,
   selectValueAggregationType,
@@ -19,6 +15,7 @@ import {
 import SetIdentifierSelect from "./SetIdentifierSelect";
 import AggregationTypeSelect from "./AggregationTypeSelect";
 import InputWithTooltip from "../InputWithTooltip";
+import {selectAggregationTypeGroups, selectSetIdentifierGroups} from "../../features/resources/resourcesSlice";
 
 interface Props {
 
@@ -34,15 +31,6 @@ const Step1: React.FC<Props> = (props) => {
   const valueAggregationType = useAppSelector(selectValueAggregationType);
   const valueFieldExpression = useAppSelector(selectValueFieldExpression);
   const valuePersonalComment = useAppSelector(selectValuePersonalComment);
-
-  // Todo: should better be moved somewhere else
-  useEffect(() => {
-    return () => {
-      dispatch(getInitialSetIdentifierGroups());
-      dispatch(getInitialAggregationTypeGroups());
-    };
-  }, []);
-
 
   const handleClickNext = (e: any) => {
     e.preventDefault();
@@ -89,7 +77,7 @@ const Step1: React.FC<Props> = (props) => {
             <Grid.Col span='auto'>
               <AggregationTypeSelect
                 list={aggregationTypeGroups}
-                selectedKey={valueAggregationType}
+                selectedValue={valueAggregationType}
                 placeholder='aggregated value (=> select the aggregation function)'
                 onChange={(value: string) => {
                   dispatch(setValueAggregationType(value));

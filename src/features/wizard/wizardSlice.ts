@@ -1,23 +1,18 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../state";
-import {ISetIdentifierGroup} from "./interfaces/ISetIdentiferGroup";
-import {SetIdentifierGroups} from "./fixtures/set-identifer-groups";
-import {AggregationTypeGroups} from "./fixtures/aggregation-type-groups";
-import {IAggregationTypeGroup} from "./interfaces/IAggregationTypeGroup";
 import {InitialWizardValue, IWizardValue} from "./interfaces/IWizardValue";
+import {ISetIdentifierGroup} from "../../common/interfaces";
 
 interface WizardState {
   currentWizardStep: number;
-  setIdentifierGroups: ISetIdentifierGroup[];
-  aggregationTypeGroups: IAggregationTypeGroup[]
+  modifierModalOpen: boolean;
   selectedSetIdentifier?: ISetIdentifierGroup;
   value: IWizardValue;
 }
 
 const initialState: WizardState = {
   currentWizardStep: 1,
-  setIdentifierGroups: [],
-  aggregationTypeGroups: [],
+  modifierModalOpen: false,
   selectedSetIdentifier: undefined,
   value: InitialWizardValue
 }
@@ -29,18 +24,15 @@ export const wizardSlice = createSlice({
     getWizardState: (state:WizardState) => {
       return state
     },
-    getInitialSetIdentifierGroups: (state: WizardState) => {
-      state.setIdentifierGroups = SetIdentifierGroups;
-      return state;
-    },
-    getInitialAggregationTypeGroups: (state:WizardState) => {
-      state.aggregationTypeGroups = AggregationTypeGroups;
-      return state;
-    },
     setCurrentWizardStep: (state: WizardState, action: PayloadAction<number>) => {
       state.currentWizardStep = action.payload;
       return state;
     },
+    setModifierModalVisibility: (state: WizardState, action: PayloadAction<boolean>) => {
+      state.modifierModalOpen = action.payload;
+      return state;
+    },
+
     setValueSetIdentifier: (state: WizardState, action: PayloadAction<string>) => {
       state.value.SetIdentifier = action.payload;
       return state;
@@ -64,9 +56,7 @@ export const wizardSlice = createSlice({
 export const {
   getWizardState,
   setCurrentWizardStep,
-  getInitialSetIdentifierGroups,
-  getInitialAggregationTypeGroups,
-
+  setModifierModalVisibility,
   setValueSetIdentifier,
   setValueAggregationType,
   setValueFieldExpression,
@@ -75,9 +65,9 @@ export const {
 } = wizardSlice.actions;
 export default wizardSlice.reducer;
 
+// UI related selectors
 export const selectCurrentWizardStep = (state: RootState): number => state.wizard.currentWizardStep;
-export const selectSetIdentifierGroups = (state: RootState): ISetIdentifierGroup[] => state.wizard.setIdentifierGroups;
-export const selectAggregationTypeGroups = (state: RootState): IAggregationTypeGroup[] => state.wizard.aggregationTypeGroups;
+export const selectIsModifierModalOpen = (state: RootState): boolean => state.wizard.modifierModalOpen;
 export const selectWizardValue = (state: RootState): IWizardValue => state.wizard.value;
 
 // Values & Set Values

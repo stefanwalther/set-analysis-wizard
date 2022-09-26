@@ -1,6 +1,6 @@
-import {IAggregationTypeGroup} from "../interfaces/IAggregationTypeGroup";
+import {IAggregationTypeGroup} from "../../../common/interfaces/IAggregationTypeGroup";
 
-export const AggregationTypeGroups: IAggregationTypeGroup[] = [
+export const AGGREGATION_TYPE_GROUPS: IAggregationTypeGroup[] = [
   {
     "label": "Basis Aggregation Functions",
     "items": [{"key": "Sum", "label": "Sum"}, {"key": "Min", "label": "Min"}, {

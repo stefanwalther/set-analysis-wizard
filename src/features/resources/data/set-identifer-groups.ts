@@ -1,6 +1,6 @@
-import {ISetIdentifierGroup} from "../interfaces/ISetIdentiferGroup";
+import {ISetIdentifierGroup} from "../../../common/interfaces";
 
-export const SetIdentifierGroups: ISetIdentifierGroup[] = [{
+export const SET_IDENTIFIER_GROUPS: ISetIdentifierGroup[] = [{
   "label": "Standard Sets",
   "items": [{"key": "$", "label": "the current selection"}, {"key": "1", "label": "all values"}, {
     "key": "1-$",

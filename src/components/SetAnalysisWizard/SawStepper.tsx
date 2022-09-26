@@ -3,7 +3,6 @@ import {Stepper} from '@mantine/core';
 import { useAppSelector, useAppDispatch } from '../../common/hooks';
 import {
   selectCurrentWizardStep,
-  selectValueSetIdentifier,
   selectWizardValue,
   setCurrentWizardStep
 } from '../../features/wizard/wizardSlice';

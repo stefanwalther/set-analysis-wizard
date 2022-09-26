@@ -1,8 +1,8 @@
 import React from 'react';
 import './SetIdentifierSelect.scss'
 import {Select, SelectItem, ActionIcon, Grid, Tooltip} from '@mantine/core';
-import {ISetIdentifierGroup} from "../../features/wizard/interfaces/ISetIdentiferGroup";
 import {IconInfoCircle} from "@tabler/icons";
+import {ISetIdentifierGroup} from "../../common/interfaces/ISetIdentiferGroup";
 
 interface Props {
   list: ISetIdentifierGroup[];

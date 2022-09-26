@@ -12,7 +12,7 @@ const Step3: React.FC<Props> = ({result}: Props) => {
         <Grid.Col>
           <Textarea
             variant='default'
-            value={result}
+            defaultValue={result}
             minRows={10}
           ></Textarea>
         </Grid.Col>

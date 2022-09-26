@@ -1,14 +1,20 @@
 import {configureStore} from '@reduxjs/toolkit'
-import uiReducer from '../features/ui/uiSlice';
 import examplesReducer from '../features/examples/examplesSlice';
+import resourcesReducer from '../features/resources/resourcesSlice';
+import uiReducer from '../features/ui/uiSlice';
 import wizardReducer from '../features/wizard/wizardSlice';
+
+const initialState = {
+}
 
 export const store = configureStore({
   reducer: {
     examples: examplesReducer,
+    resources: resourcesReducer,
     ui: uiReducer,
     wizard: wizardReducer
   },
+  preloadedState: initialState
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

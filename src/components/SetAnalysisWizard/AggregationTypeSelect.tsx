@@ -1,16 +1,16 @@
 import React from 'react';
 import { Select, SelectItem } from '@mantine/core';
-import {IAggregationTypeGroup} from "../../features/wizard/interfaces/IAggregationTypeGroup";
 import InputWithTooltip from "../InputWithTooltip";
+import {IAggregationTypeGroup} from "../../common/interfaces";
 
 interface Props {
   list: IAggregationTypeGroup[];
   placeholder?: string;
-  selectedKey?: string;
+  selectedValue?: string;
   onChange?: (value: string) => void;
 }
 
-const AggregationTypeSelect: React.FC<Props> = ({list, placeholder, selectedKey, onChange}: Props) => {
+const AggregationTypeSelect: React.FC<Props> = ({list, placeholder, selectedValue, onChange}: Props) => {
 
   const items: SelectItem[] = list?.flatMap(group => {
     const groupName = group.label;
@@ -22,7 +22,7 @@ const AggregationTypeSelect: React.FC<Props> = ({list, placeholder, selectedKey,
   return (
     <InputWithTooltip
       inputField={<Select
-          value={selectedKey}
+          value={selectedValue}
           placeholder={placeholder}
           data={items}
           searchable

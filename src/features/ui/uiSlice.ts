@@ -2,10 +2,15 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../state";
 
 interface UIState {
+  /**
+   * Indicates that the application is loading
+   */
+  appLoading: boolean,
   isSettingsDrawerOpen: boolean,
 }
 
 const initialState: UIState = {
+  appLoading: false,
   isSettingsDrawerOpen: false
 
 }

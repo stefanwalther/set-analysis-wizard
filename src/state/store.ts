@@ -1,5 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
 import examplesReducer from '../features/examples/examplesSlice';
+import setModifierFormReducer from '../features/set-modifier-form/setModifierFormSlice';
 import resourcesReducer from '../features/resources/resourcesSlice';
 import uiReducer from '../features/ui/uiSlice';
 import wizardReducer from '../features/wizard/wizardSlice';
@@ -10,6 +11,7 @@ const initialState = {
 export const store = configureStore({
   reducer: {
     examples: examplesReducer,
+    smForm: setModifierFormReducer,
     resources: resourcesReducer,
     ui: uiReducer,
     wizard: wizardReducer

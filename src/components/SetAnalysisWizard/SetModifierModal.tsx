@@ -23,8 +23,8 @@ const SetModifierModal: React.FC<Props> = (props) => {
     <Modal
       opened={isModalOpen}
       onClose={() => handleClose()}
-      title={'Set Modifier'}
-      size='xl'
+      title={'Add/Change Set Modifier'}
+      size='1000px'
       styles={(theme) => ({
         header: {
           fontWeight: 'bold',

@@ -21,7 +21,7 @@ export const wizardSlice = createSlice({
   name: 'wizard',
   initialState,
   reducers: {
-    getWizardState: (state:WizardState) => {
+    getWizardState: (state: WizardState) => {
       return state
     },
     setCurrentWizardStep: (state: WizardState, action: PayloadAction<number>) => {
@@ -48,7 +48,8 @@ export const wizardSlice = createSlice({
     setValuePersonalComment: (state: WizardState, action: PayloadAction<string>) => {
       state.value.PersonalComment = action.payload;
       return state;
-    }
+    },
+
 
   }
 });

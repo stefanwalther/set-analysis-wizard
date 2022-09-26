@@ -1,13 +1,16 @@
 import React from 'react';
+import {Box} from "@mantine/core";
 
 interface Props {
+  id: string;
+  hidden?: boolean;
 }
 
 const SetModifierDescription: React.FC<Props> = (props) => {
   return (
-    <div style={{height: '100px', backgroundColor: 'orange'}} >
+    <Box id={props.id} hidden={props.hidden} style={{height: '100px', backgroundColor: 'lightOrange'}}>
       Lore ipusum dolor sit amet
-    </div>
+    </Box>
   );
 }
 export default SetModifierDescription;

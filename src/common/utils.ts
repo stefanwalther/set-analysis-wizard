@@ -42,4 +42,33 @@ const trim = (s: string) => {
   }
 }
 
-export { bracketize, multiplyString, trim };
+const nullOrEmpty = (o: any): boolean => {
+  return o === null || o.length == 0 || typeof o === 'undefined';
+
+}
+
+//Todo: Can for sure be replaced with something standard ...
+const isNumber = (n: any) => {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+// -----------------------------------------------------------------
+// Trim all elements of the array
+// Relies on the external jQuery trim function ...
+// ~~
+// Examples:
+// {" A", "B "}     => {"A","B"}
+// -----------------------------------------------------------------
+function trimArray(arr: any) {
+
+  if (Array.isArray(arr)) {
+    let newArray: Array<string> = [];
+    for (let i = 0; i < arr.length; i++) {
+      newArray.push(trim(arr[i]));
+    }
+    return newArray;
+  }
+  return null;
+}
+
+export { bracketize, isNumber, nullOrEmpty, multiplyString, trim, trimArray };

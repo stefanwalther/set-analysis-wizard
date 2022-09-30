@@ -58,8 +58,8 @@ const SetModifierForm: React.FC<Props> = (props) => {
   return (
     <Paper shadow='0' p='md'>
       <Text size='sm'>
-        In the form below you can select an action and defined the required parameters for the selected action.<br/>
-        After clicking on "Save" the action will be added to the Set Analysis expression.
+        In the form below you can select an action and define the required parameters for the selected action.<br/>
+        After clicking on "Save" the action will be added to your Set Analysis definition.
       </Text>
       <Title order={5} pt={20}>What would you like to do?</Title>
       <Grid>

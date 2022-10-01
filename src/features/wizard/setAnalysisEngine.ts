@@ -12,7 +12,7 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
   Expression: string = "";
   PureDescription?: string;
 
-  SetModifierActions: any[] = [];
+  SetModifiers: any[] = [];
 
   constructor();
   constructor(props?: ISetAnalysisDefinitionProps) {
@@ -98,7 +98,7 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
     desc += '{cComment}based on ' + this.getSetIdentifierDescription() + '{cLB}';
     desc += '{cMarkerEndMain}';
 
-    if (Array.isArray(this.SetModifierActions) && this.SetModifierActions.length > 0) {
+    if (Array.isArray(this.SetModifiers) && this.SetModifiers.length > 0) {
 
       // 2nd line
       desc += '{cComment}~~{cLB}';
@@ -106,8 +106,8 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
 
       // 3rd line
       let sm_d = []; //temporary array for building the string
-      for (let i = 0; i < this.SetModifierActions.length; i++) {
-        sm_d.push('{cComment}' + multiplyString(' ', 5) + '- ' + this.SetModifierActions[i].GetDescription());
+      for (let i = 0; i < this.SetModifiers.length; i++) {
+        sm_d.push('{cComment}' + multiplyString(' ', 5) + '- ' + this.SetModifiers[i].GetDescription());
       }
       desc += sm_d.join('{cLB}');
 
@@ -194,11 +194,11 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
   private getSetModifier = () => {
 
     let retVal = "";
-    if (this.SetModifierActions !== null && this.SetModifierActions.length > 0) {
+    if (this.SetModifiers !== null && this.SetModifiers.length > 0) {
 
       let sm = [];
-      for (let i = 0; i < this.SetModifierActions.length; i++) {
-        sm.push(this.SetModifierActions[i].GetModifier());
+      for (let i = 0; i < this.SetModifiers.length; i++) {
+        sm.push(this.SetModifiers[i].GetModifier());
       }
       retVal = sm.join(',');
     }

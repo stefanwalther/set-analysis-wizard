@@ -7,7 +7,7 @@ const item: ISetAnalysisDefinitionProps = {
   "Bookmark": "",
   "PersonalComment": "Count values of field \"Customer\" based on the current selection",
   "Expression": "Count({$}Customer)",
-  "SetModifierActions": undefined
+  "SetModifiers": undefined
 }
 
 export default item;

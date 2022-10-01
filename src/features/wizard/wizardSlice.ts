@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../state";
 import {InitialWizardValue, IWizardValue} from "./interfaces/IWizardValue";
 import {ISetIdentifierGroup} from "../../common/interfaces";
+import {SetModifier} from "../../common/models/SetModifier";
 
 interface WizardState {
   currentWizardStep: number;
@@ -49,12 +50,15 @@ export const wizardSlice = createSlice({
       state.value.PersonalComment = action.payload;
       return state;
     },
-
-
+    addSetModifier: (state: WizardState, action: PayloadAction<SetModifier>) => {
+      state.value.SetModifiers?.push(action.payload);
+      return state;
+    }
   }
 });
 
 export const {
+  addSetModifier,
   getWizardState,
   setCurrentWizardStep,
   setModifierModalVisibility,
@@ -65,6 +69,11 @@ export const {
 
 } = wizardSlice.actions;
 export default wizardSlice.reducer;
+
+// General
+export const selectSerializedState = (state: RootState): string => {
+  return JSON.stringify(state.wizard);
+}
 
 // UI related selectors
 export const selectCurrentWizardStep = (state: RootState): number => state.wizard.currentWizardStep;

@@ -21,7 +21,7 @@ import {
 } from "../../features/resources/resourcesSlice";
 import {IconCheck, IconCopy, IconX} from "@tabler/icons";
 import SetModifierDescription from "./SetModifierDescription";
-import {setModifierModalVisibility} from "../../features/wizard/wizardSlice";
+import {addSetModifier, setModifierModalVisibility} from "../../features/wizard/wizardSlice";
 import {
   selectFieldsVisibility,
   setAction,
@@ -47,6 +47,11 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
     dispatch(setAction(value))
   }
 
+  const handleSave = () => {
+    dispatch(addSetModifier(state));
+    dispatch(setModifierModalVisibility(false));
+  }
+
   const itemsSetModifierActionGroups: SelectItem[] = setModifierActionGroups?.flatMap(group => {
     const groupName = group.label;
     return group.items.map(item => {
@@ -54,11 +59,9 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
     });
   });
 
-  const handleSave = () => {
-    dispatch(setModifierModalVisibility(false));
-  }
   const handleClose = () => {
     dispatch(setModifierModalVisibility(false));
+    // Todo: reset form
   }
 
   return (

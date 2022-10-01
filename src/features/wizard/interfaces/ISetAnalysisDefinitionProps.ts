@@ -1,3 +1,5 @@
+import {SetModifier} from "../../../common/models/SetModifier";
+
 export interface ISetAnalysisDefinitionProps {
   SetIdentifier: string;
   SetIdentifierDesc?: string;
@@ -8,5 +10,5 @@ export interface ISetAnalysisDefinitionProps {
   PersonalComment?: string;
   PureDescription?: string;
   Expression?: string;
-  SetModifierActions?: any[];
+  SetModifiers?: SetModifier[];
 }

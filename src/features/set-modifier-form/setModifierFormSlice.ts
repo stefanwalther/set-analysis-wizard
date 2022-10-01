@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../state";
 import {ActionEnum} from "./enums/ActionEnum";
+import {SetModifier} from "../../common/models/SetModifier";
 
 // Todo: we could/should just load from the initialState here ...
 const setAllInvisible = (state: SetModifierFormState): SetModifierFormState => {
@@ -23,7 +24,12 @@ const setAllInvisible = (state: SetModifierFormState): SetModifierFormState => {
   return state;
 }
 
-const setActionLogic = (state: SetModifierFormState, action: ActionEnum): SetModifierFormState => {
+/**
+ * Hide/Unhide fields depending on the action.
+ * @param state
+ * @param action
+ */
+const setActionVisibilityLogic = (state: SetModifierFormState, action: ActionEnum): SetModifierFormState => {
 
   let s = state.visibility;
 
@@ -158,16 +164,17 @@ interface SetModifierFormState {
     sm_section_field: boolean;
     sm_section_preview: boolean;
   },
-  values: {
-    sm_action: string;
-    sm_field_operator: string;
-    sm_field: string;
-    sm_other_field: string;
-    sm_selection_operator: string;
-    sm_value_1: string;
-    sm_value_2: string;
-    sm_indirect_field: string;
-  }
+  // values: {
+  //   sm_action: string;
+  //   sm_field_operator: string;
+  //   sm_field: string;
+  //   sm_other_field: string;
+  //   sm_selection_operator: string;
+  //   sm_value_1: string;
+  //   sm_value_2: string;
+  //   sm_indirect_field: string;
+  // },
+  state: SetModifier
 }
 
 const initialState: SetModifierFormState = {
@@ -189,16 +196,17 @@ const initialState: SetModifierFormState = {
     sm_section_field: false,
     sm_section_preview: false,
   },
-  values: {
-    sm_action: '',
-    sm_field_operator: '',
-    sm_field: '',
-    sm_other_field: '',
-    sm_selection_operator: '',
-    sm_value_1: '',
-    sm_value_2: '',
-    sm_indirect_field: '',
-  }
+  // values: {
+  //   sm_action: '',
+  //   sm_field_operator: '',
+  //   sm_field: '',
+  //   sm_other_field: '',
+  //   sm_selection_operator: '',
+  //   sm_value_1: '',
+  //   sm_value_2: '',
+  //   sm_indirect_field: '',
+  // },
+  state: new SetModifier()
 }
 
 
@@ -207,15 +215,45 @@ export const setModifierFormSlice = createSlice({
   initialState,
   reducers: {
     setAction: (state: SetModifierFormState, action: PayloadAction<string | null>) => {
-      let typedAction = action.payload as ActionEnum
-      setActionLogic(state, typedAction);
+      let typedAction = action.payload as ActionEnum;
+      state.state.Action = typedAction;
+      setActionVisibilityLogic(state, typedAction);
+      return state;
+    },
+    setField: (state: SetModifierFormState, action: PayloadAction<string>) => {
+      state.state.Field = action.payload;
+      return state;
+    },
+    setFieldOperator: (state: SetModifierFormState, action: PayloadAction<string>) => {
+      state.state.FieldOperator = action.payload;
+      return state;
+    },
+    setIndirectField: (state: SetModifierFormState, action: PayloadAction<string>) => {
+      state.state.IndirectField = action.payload;
+      return state;
+    },
+    setOtherField: (state: SetModifierFormState, action: PayloadAction<string>) => {
+      state.state.OtherField = action.payload;
+      return state;
+    },
+    setSelectionOperator: (state: SetModifierFormState, action: PayloadAction<string>) => {
+      state.state.SelectionOperator = action.payload;
+      return state;
+    },
+    setValue1: (state:SetModifierFormState, action: PayloadAction<string>) => {
+      state.state.ValuesOrExpression_1 = action.payload;
+      return state;
+    },
+    setValue2: (state:SetModifierFormState, action: PayloadAction<string>) => {
+      state.state.ValuesOrExpression_2 = action.payload;
       return state;
     }
   }
 });
 
-export const {setAction} = setModifierFormSlice.actions;
+export const {setAction, setField, setFieldOperator, setIndirectField, setOtherField, setSelectionOperator, setValue1, setValue2} = setModifierFormSlice.actions;
 export default setModifierFormSlice.reducer;
 
 // Selectors
 export const selectFieldsVisibility = (state: RootState): SetModifierFormState['visibility'] => state.smForm.visibility;
+export const selectSetModifier = (state: RootState): SetModifier => state.smForm.state;

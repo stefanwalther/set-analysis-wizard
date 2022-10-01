@@ -13,7 +13,7 @@ import {isNumber, nullOrEmpty, trimArray} from "./utils";
 const qualifyElement = (el: any, mask: any = '', isWildCardExp: boolean = false) => {
 
   // empty, null or 0-string => return el
-  if (el == null || el == 'undefined' || el.length == 0) {
+  if (el === null || el === 'undefined' || el.length === 0) {
     return el;
   }
 

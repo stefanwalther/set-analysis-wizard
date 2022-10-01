@@ -4,14 +4,13 @@ import {
   Text,
   TextInput,
   Button,
-  ActionIcon,
   SelectItem,
   Group,
   Paper,
   Title,
   Container
 } from '@mantine/core';
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import InputWithTooltip from "../InputWithTooltip";
 import {IFieldOperator, ISetModifierActionGroup} from "../../common/interfaces";
 import {useAppDispatch, useAppSelector} from "../../common/hooks";
@@ -20,16 +19,23 @@ import {
   selectSelectionOperators,
   selectSetModifierActionGroups
 } from "../../features/resources/resourcesSlice";
-import {IconCheck, IconCopy, IconCross, IconX} from "@tabler/icons";
+import {IconCheck, IconCopy, IconX} from "@tabler/icons";
 import SetModifierDescription from "./SetModifierDescription";
 import {setModifierModalVisibility} from "../../features/wizard/wizardSlice";
-import {selectFieldsVisibility, setAction} from "../../features/set-modifier-form/setModifierFormSlice";
+import {
+  selectFieldsVisibility,
+  setAction,
+  setField,
+  setFieldOperator, setIndirectField, setOtherField, setSelectionOperator, setValue1
+} from "../../features/set-modifier-form/setModifierFormSlice";
 import {ISelectionOperator} from "../../common/interfaces/ISelectionOperator";
+import {SetModifier} from "../../common/models/SetModifier";
 
 interface Props {
+  state: SetModifier
 }
 
-const SetModifierForm: React.FC<Props> = (props) => {
+const SetModifierForm: React.FC<Props> = ({state}: Props) => {
 
   const dispatch = useAppDispatch();
   const fieldOperators: IFieldOperator[] = useAppSelector(selectFieldOperators);
@@ -71,6 +77,7 @@ const SetModifierForm: React.FC<Props> = (props) => {
                                 data={itemsSetModifierActionGroups}
                                 placeholder='Select one of the actions'
                                 allowDeselect
+                                value={state.Action}
                                 styles={(theme) => ({
                                   separatorLabel: {
                                     fontWeight: 'bold',
@@ -96,17 +103,40 @@ const SetModifierForm: React.FC<Props> = (props) => {
         <Title order={5} pt={20}>Field</Title>
         <Grid columns={3}>
           <Grid.Col pl={20} span='content' style={{width: '50%'}}>
-            <InputWithTooltip id='sm_field_operator' hidden={!fieldVisibility.sm_field_operator}
-                              inputField={<Select data={fieldOperators} label='Mode'
-                                                  placeholder='How do you want to change your set?'/>} tooltip={''}/>
+            <InputWithTooltip id='sm_field_operator'
+                              hidden={!fieldVisibility.sm_field_operator}
+                              inputField={
+                                <Select
+                                  data={fieldOperators}
+                                  label='Mode'
+                                  value={state.FieldOperator}
+                                  onChange={(value: string) => {
+                                    console.log('changed fieldOperator', value);
+                                    dispatch(setFieldOperator(value))
+                                  }
+                                  }
+                                  placeholder='How do you want to change your set?'
+                                />}
+                              tooltip={''}/>
           </Grid.Col>
           <Grid.Col span='auto' style={{width: 50}}>
             <div id='sm_field_operator_in' hidden={!fieldVisibility.sm_field_operator_in} className='align-middle'>in
             </div>
           </Grid.Col>
           <Grid.Col span='content' style={{width: '40%'}}>
-            <InputWithTooltip id='sm_field' hidden={!fieldVisibility.sm_field}
-                              inputField={<TextInput label='Field' placeholder='field name or expression'/>}
+            <InputWithTooltip id='sm_field'
+                              hidden={!fieldVisibility.sm_field}
+                              inputField={
+                                <TextInput
+                                  label='Field'
+                                  defaultValue={state.Field}
+                                  placeholder='field name or expression'
+                                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    dispatch(setField(e.target.value));
+                                  }
+                                  }
+                                />
+                              }
                               tooltip=''></InputWithTooltip>
           </Grid.Col>
         </Grid>
@@ -116,24 +146,67 @@ const SetModifierForm: React.FC<Props> = (props) => {
         <Title order={5} pt={20}>Condition</Title>
         <Grid columns={3}>
           <Grid.Col span={1} pl={20}>
-            <InputWithTooltip id='sm_other_field' hidden={!fieldVisibility.sm_other_field}
-                              inputField={<TextInput label='"Other Field"' placeholder='field name'
-                                                     style={{width: '200px'}}/>} tooltip=''></InputWithTooltip>
+            <InputWithTooltip id='sm_other_field'
+                              hidden={!fieldVisibility.sm_other_field}
+                              inputField={
+                                <TextInput
+                                  label='"Other Field"'
+                                  placeholder='field name'
+                                  style={{width: '200px'}}
+                                  defaultValue={state.OtherField}
+                                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    dispatch(setOtherField(e.target.value));
+                                  }}
+                                />}
+                              tooltip=''></InputWithTooltip>
           </Grid.Col>
           <Grid.Col span={2}>
             <Grid columns={4}>
-              <Grid.Col span={2}><InputWithTooltip id='sm_selection_operator'
-                                                   hidden={!fieldVisibility.sm_selection_operator}
-                                                   inputField={<Select data={selectionOperators} label='Operator'
-                                                                       placeholder='select and operator'/>}
-                                                   tooltip='foo'/></Grid.Col>
-              <Grid.Col span={2}><InputWithTooltip id='sm_value_1' hidden={!fieldVisibility.sm_value_1}
-                                                   inputField={<TextInput label='Value(s)'/>} tooltip='foo'/></Grid.Col>
+              <Grid.Col span={2}><InputWithTooltip
+                id='sm_selection_operator'
+                hidden={!fieldVisibility.sm_selection_operator}
+                inputField={
+                  <Select
+                    data={selectionOperators}
+                    label='Operator'
+                    placeholder='select and operator'
+                    defaultValue={state.SelectionOperator}
+                    onChange={(value: string) => {
+                      dispatch(setSelectionOperator(value));
+                    }}
+                  />}
+                tooltip='foo'/>
+              </Grid.Col>
+              <Grid.Col span={2}>
+                <InputWithTooltip
+                  id='sm_value_1'
+                  hidden={!fieldVisibility.sm_value_1}
+                  inputField={
+                    <TextInput
+                      label='Value(s)'
+                      defaultValue={state.ValuesOrExpression_1}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        dispatch(setValue1(e.target.value));
+                      }}
+                    />}
+                  tooltip='foo'/>
+              </Grid.Col>
             </Grid>
             <Grid columns={6}>
               <Grid.Col span={4}>
-                <InputWithTooltip id='sm_indirect_field' hidden={!fieldVisibility.sm_indirect_field}
-                                  inputField={<TextInput label='Indirect Selection for Field'/>} tooltip='foo'/>
+                <InputWithTooltip
+                  id='sm_indirect_field'
+                  hidden={!fieldVisibility.sm_indirect_field}
+                  inputField={
+                    <TextInput
+                      label='Indirect Selection for Field'
+                      defaultValue={state.IndirectField}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        dispatch(setIndirectField(e.target.value));
+                      }}
+                    />}
+                  tooltip='foo'
+                />
               </Grid.Col>
               <Grid.Col span={1} p={0}>
                 <Button id='sm_copy_other_field' hidden={!fieldVisibility.sm_copy_other_field} variant="subtle"
@@ -145,8 +218,12 @@ const SetModifierForm: React.FC<Props> = (props) => {
       </Container>
 
       <Container id='sm_section_preview' hidden={!fieldVisibility.sm_section_preview}>
-        <Title order={5}>Preview</Title>
-        <SetModifierDescription id='sm_description' hidden={!fieldVisibility.sm_description}/>
+        <Title order={5}>Explanation</Title>
+        <SetModifierDescription
+          id='sm_description'
+          hidden={false}
+          value={state.getDescription()}
+        />
       </Container>
 
       <Group position='apart' mt='xl' pt={10}>

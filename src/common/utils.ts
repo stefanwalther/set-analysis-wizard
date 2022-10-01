@@ -43,7 +43,7 @@ const trim = (s: string) => {
 }
 
 const nullOrEmpty = (o: any): boolean => {
-  return o === null || o.length == 0 || typeof o === 'undefined';
+  return o === null || o.length === 0 || typeof o === 'undefined';
 
 }
 

@@ -5,6 +5,7 @@ import resourcesReducer from '../features/resources/resourcesSlice';
 import uiReducer from '../features/ui/uiSlice';
 import wizardReducer from '../features/wizard/wizardSlice';
 
+
 const initialState = {
 }
 
@@ -16,7 +17,10 @@ export const store = configureStore({
     ui: uiReducer,
     wizard: wizardReducer
   },
-  preloadedState: initialState
+  preloadedState: initialState,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false
+  }),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

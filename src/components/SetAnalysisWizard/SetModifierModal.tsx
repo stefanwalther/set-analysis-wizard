@@ -1,8 +1,9 @@
 import React from 'react';
-import {Modal, Button} from "@mantine/core";
+import {Modal} from "@mantine/core";
 import {useAppDispatch, useAppSelector} from "../../common/hooks";
 import {selectIsModifierModalOpen, setModifierModalVisibility} from "../../features/wizard/wizardSlice";
 import SetModifierForm from "./SetModifierForm";
+import {selectSetModifier} from "../../features/set-modifier-form/setModifierFormSlice";
 
 
 interface Props {
@@ -13,6 +14,7 @@ const SetModifierModal: React.FC<Props> = (props) => {
 
   const dispatch = useAppDispatch();
   const isModalOpen = useAppSelector(selectIsModifierModalOpen);
+  const setModifierState = useAppSelector(selectSetModifier);
 
   const handleClose = () => {
     // Todo - decide whether to close the form or not (if eg. dirty)
@@ -32,7 +34,7 @@ const SetModifierModal: React.FC<Props> = (props) => {
         }
       })}
     >
-      <SetModifierForm/>
+      <SetModifierForm state={setModifierState}/>
     </Modal>
   );
 }

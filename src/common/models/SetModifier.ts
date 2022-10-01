@@ -2,7 +2,7 @@ import {bracketize, nullOrEmpty} from "../utils";
 import {qualifyElement} from "../set-analysis-utils";
 
 // Todo: add a ctor to make it easier to work with this class
-export class StateModifier {
+export class SetModifier {
 
   public Action: string = '';                 // Action
   public Field: string = '';                  // Field
@@ -169,17 +169,17 @@ export class StateModifier {
       case "set_remove": //OK, done
         return "Remove selection in field \"" + this.Field + "\"";
       case "set_modify_by_value": //OK; done
-        return this.getFieldOperatorDescription() + " " + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + " in field \"" + this.Field + "\"";
+        return this.getFieldOperatorDescription() + ` ` + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + " in field \"" + this.Field + '"';
       case "set_modify_by_expression": //OK; done
-        return this.getFieldOperatorDescription() + " in field \"" + this.Field + "\" matching the condition: [" + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + "]";
+        return this.getFieldOperatorDescription() + ` in field "` + this.Field + "\" matching the condition: [" + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + "]";
       case "set_pindirect": //OK; done
-        return 'Select records in \"' + this.Field + '\" based on the indirect selections in \"' + indirectField + '\" for those records ' + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + ' in field \"' + this.OtherField + '\"';
+        return 'Select records in "' + this.Field + '" based on the indirect selections in "' + indirectField + '" for those records ' + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + ' in field "' + this.OtherField + '"';
       case "set_eindirect":
-        return 'Select records in \"' + this.Field + '\" based on the INVERSE indirect selections in \"' + indirectField + '\" for those records ' + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + ' in field \"' + this.OtherField + '\"';
+        return 'Select records in "' + this.Field + '" based on the INVERSE indirect selections in "' + indirectField + '" for those records ' + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + ' in field "' + this.OtherField + '"';
       case "set_pindirect_exp":
-        return 'Select records in \"' + this.Field + '\" but only for those records matching the condition [' + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + '] in field \"' + this.OtherField + '\"';
+        return 'Select records in "' + this.Field + '" but only for those records matching the condition [' + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + '] in field "' + this.OtherField + '"';
       case "set_eindirect_exp":
-        return 'Select records in \"' + this.Field + '\" but only for those records NOT matching the condition [' + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + '] in field \"' + this.OtherField + '\"';
+        return 'Select records in "' + this.Field + '" but only for those records NOT matching the condition [' + this.getSelectionOperatorDesc().replace("{val1}", this.ValuesOrExpression_1).replace("{val2}", this.ValuesOrExpression_2) + '] in field "' + this.OtherField + '"';
       default:
         return '';
     }

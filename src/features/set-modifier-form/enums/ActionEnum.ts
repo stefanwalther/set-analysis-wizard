@@ -1,4 +1,5 @@
 export enum ActionEnum {
+  undefined = '', // This is the default value
   set_remove = 'set_remove',
   set_select_additionally = 'set_select_additionally',
   set_modify_by_value = 'set_modify_by_value',

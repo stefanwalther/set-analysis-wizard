@@ -2,6 +2,7 @@ import React from 'react';
 import {Modal} from "@mantine/core";
 import {useAppDispatch, useAppSelector} from "../../common/hooks";
 import {selectIsModifierModalOpen, setModifierModalVisibility} from "../../features/wizard/wizardSlice";
+
 import SetModifierForm from "./SetModifierForm";
 import {selectSetModifier} from "../../features/set-modifier-form/setModifierFormSlice";
 
@@ -19,6 +20,7 @@ const SetModifierModal: React.FC<Props> = (props) => {
   const handleClose = () => {
     // Todo - decide whether to close the form or not (if eg. dirty)
     dispatch(setModifierModalVisibility(false));
+
   }
 
   return (

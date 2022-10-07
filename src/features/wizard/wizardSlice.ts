@@ -1,21 +1,27 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../state";
-import {InitialWizardValue, IWizardValue} from "./interfaces/IWizardValue";
-import {ISetIdentifierGroup} from "../../common/interfaces";
-import {SetModifier} from "../../common/models/SetModifier";
+import {ISetIdentifierGroup, setModifierInitialValues} from "../../common/interfaces";
+import {ISetModifier} from "../../common/interfaces";
+import {ISetAnalysisDefinitionProps} from "./interfaces/ISetAnalysisDefinitionProps";
 
 interface WizardState {
   currentWizardStep: number;
   modifierModalOpen: boolean;
   selectedSetIdentifier?: ISetIdentifierGroup;
-  value: IWizardValue;
+  value: ISetAnalysisDefinitionProps
 }
 
 const initialState: WizardState = {
   currentWizardStep: 1,
   modifierModalOpen: false,
   selectedSetIdentifier: undefined,
-  value: InitialWizardValue
+  // currentSetModifierFormValue: setModifierInitialValues,
+  value: {
+    FieldExpression: "",
+    SetIdentifier: "",
+    AggregationType: "",
+    SetModifiers: []
+  }
 }
 
 export const wizardSlice = createSlice({
@@ -33,7 +39,6 @@ export const wizardSlice = createSlice({
       state.modifierModalOpen = action.payload;
       return state;
     },
-
     setValueSetIdentifier: (state: WizardState, action: PayloadAction<string>) => {
       state.value.SetIdentifier = action.payload;
       return state;
@@ -50,17 +55,39 @@ export const wizardSlice = createSlice({
       state.value.PersonalComment = action.payload;
       return state;
     },
-    addSetModifier: (state: WizardState, action: PayloadAction<SetModifier>) => {
-      state.value.SetModifiers?.push(action.payload);
+    saveSetModifier: (state: WizardState, action: PayloadAction<ISetModifier>) => {
+
+      let id = action.payload.uid;
+
+      if (state.value.SetModifiers.find((item) => item.uid === id)) {
+        state.value.SetModifiers = state.value.SetModifiers.map((item) => {
+          if (item.uid === id) {
+            return Object.assign({}, action.payload);
+          }
+          return item;
+        })
+      } else {
+        state.value.SetModifiers?.push(Object.assign({}, action.payload));
+      }
+      return state;
+    },
+    resetModifiers: (state: WizardState) => {
+      state.value.SetModifiers = [];
+      return state;
+    },
+    deleteModifier: (state: WizardState, action: PayloadAction<number>) => {
+      state.value.SetModifiers.splice(action.payload, 1);
       return state;
     }
   }
 });
 
 export const {
-  addSetModifier,
+  deleteModifier,
   getWizardState,
+  resetModifiers,
   setCurrentWizardStep,
+  saveSetModifier,
   setModifierModalVisibility,
   setValueSetIdentifier,
   setValueAggregationType,
@@ -78,9 +105,10 @@ export const selectSerializedState = (state: RootState): string => {
 // UI related selectors
 export const selectCurrentWizardStep = (state: RootState): number => state.wizard.currentWizardStep;
 export const selectIsModifierModalOpen = (state: RootState): boolean => state.wizard.modifierModalOpen;
-export const selectWizardValue = (state: RootState): IWizardValue => state.wizard.value;
+export const selectWizardValue = (state: RootState): ISetAnalysisDefinitionProps => state.wizard.value;
 
 // Values & Set Values
+export const selectSetModifiers = (state: RootState): ISetModifier[] => state.wizard.value.SetModifiers;
 export const selectValueSetIdentifier = (state: RootState): string => state.wizard.value.SetIdentifier;
 export const selectValueAggregationType = (state: RootState): string => state.wizard.value.AggregationType;
 export const selectValueFieldExpression = (state: RootState): string => state.wizard.value.FieldExpression;

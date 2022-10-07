@@ -2,6 +2,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../state";
 import {ActionEnum} from "./enums/ActionEnum";
 import {SetModifier} from "../../common/models/SetModifier";
+import {ISetModifier, setModifierInitialValues} from "../../common/interfaces";
+import {v4 as uuidv4} from 'uuid';
 
 // Todo: we could/should just load from the initialState here ...
 const setAllInvisible = (state: SetModifierFormState): SetModifierFormState => {
@@ -29,9 +31,12 @@ const setAllInvisible = (state: SetModifierFormState): SetModifierFormState => {
  * @param state
  * @param action
  */
-const setActionVisibilityLogic = (state: SetModifierFormState, action: ActionEnum): SetModifierFormState => {
+const setActionVisibilityLogic = (state: SetModifierFormState, action?: ActionEnum): SetModifierFormState => {
 
   let s = state.visibility;
+  if (typeof action === 'undefined') {
+    action = state.formState.Action;
+  }
 
   state = setAllInvisible(state);
 
@@ -174,7 +179,7 @@ interface SetModifierFormState {
   //   sm_value_2: string;
   //   sm_indirect_field: string;
   // },
-  state: SetModifier
+  formState: ISetModifier
 }
 
 const initialState: SetModifierFormState = {
@@ -206,54 +211,96 @@ const initialState: SetModifierFormState = {
   //   sm_value_2: '',
   //   sm_indirect_field: '',
   // },
-  state: new SetModifier()
+  formState: setModifierInitialValues()
 }
 
+const calcExplanation = (state: SetModifierFormState) => {
+  let sm = new SetModifier(state.formState);
+  state.formState.Explanation = sm.getDescription();
+  return state;
+}
 
 export const setModifierFormSlice = createSlice({
   name: 'modifier-modal',
   initialState,
   reducers: {
+    initSMFormState: (state) => {
+      state.formState = setModifierInitialValues();
+      setActionVisibilityLogic(state, state.formState.Action);
+      return state;
+    },
+    setFormState: (state, action: PayloadAction<ISetModifier>) => {
+      state.formState = action.payload;
+      setActionVisibilityLogic(state);
+      return state;
+    },
+    setUUid: (state) => {
+      state.formState.uid = uuidv4();
+      return state;
+    },
     setAction: (state: SetModifierFormState, action: PayloadAction<string | null>) => {
       let typedAction = action.payload as ActionEnum;
-      state.state.Action = typedAction;
+      state.formState.Action = typedAction;
+      calcExplanation(state);
       setActionVisibilityLogic(state, typedAction);
       return state;
     },
     setField: (state: SetModifierFormState, action: PayloadAction<string>) => {
-      state.state.Field = action.payload;
+      state.formState.Field = action.payload;
+      calcExplanation(state);
       return state;
     },
     setFieldOperator: (state: SetModifierFormState, action: PayloadAction<string>) => {
-      state.state.FieldOperator = action.payload;
+      state.formState.FieldOperator = action.payload;
+      calcExplanation(state);
       return state;
     },
     setIndirectField: (state: SetModifierFormState, action: PayloadAction<string>) => {
-      state.state.IndirectField = action.payload;
+      state.formState.IndirectField = action.payload;
+      calcExplanation(state);
       return state;
     },
     setOtherField: (state: SetModifierFormState, action: PayloadAction<string>) => {
-      state.state.OtherField = action.payload;
+      state.formState.OtherField = action.payload;
+      calcExplanation(state);
       return state;
     },
     setSelectionOperator: (state: SetModifierFormState, action: PayloadAction<string>) => {
-      state.state.SelectionOperator = action.payload;
+      state.formState.SelectionOperator = action.payload;
+      calcExplanation(state);
       return state;
     },
-    setValue1: (state:SetModifierFormState, action: PayloadAction<string>) => {
-      state.state.ValuesOrExpression_1 = action.payload;
+    setValue1: (state: SetModifierFormState, action: PayloadAction<string>) => {
+      state.formState.ValuesOrExpression_1 = action.payload;
+      calcExplanation(state);
       return state;
     },
-    setValue2: (state:SetModifierFormState, action: PayloadAction<string>) => {
-      state.state.ValuesOrExpression_2 = action.payload;
+    setValue2: (state: SetModifierFormState, action: PayloadAction<string>) => {
+      state.formState.ValuesOrExpression_2 = action.payload;
+      calcExplanation(state);
+      return state;
+    },
+    resetFormSate: (state: SetModifierFormState) => {
+      state.formState = setModifierInitialValues();
       return state;
     }
   }
 });
 
-export const {setAction, setField, setFieldOperator, setIndirectField, setOtherField, setSelectionOperator, setValue1, setValue2} = setModifierFormSlice.actions;
+export const {
+  initSMFormState,
+  setAction,
+  setField,
+  setFieldOperator,
+  setFormState,
+  setIndirectField,
+  setOtherField,
+  setSelectionOperator,
+  setValue1,
+  setValue2
+} = setModifierFormSlice.actions;
 export default setModifierFormSlice.reducer;
 
 // Selectors
 export const selectFieldsVisibility = (state: RootState): SetModifierFormState['visibility'] => state.smForm.visibility;
-export const selectSetModifier = (state: RootState): SetModifier => state.smForm.state;
+export const selectSetModifier = (state: RootState): ISetModifier => state.smForm.formState;

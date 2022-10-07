@@ -8,7 +8,8 @@ describe('setAnalysisEngine', () => {
       SetIdentifier: "$",
       AggregationType: "Sum",
       FieldExpression: "Sales",
-      PersonalComment: "Calculate the sum of \"Sales\" (based on the current selection)."
+      PersonalComment: "Calculate the sum of \"Sales\" (based on the current selection).",
+      SetModifiers: []
     });
     sae.Calculate();
     expect(sae.Expression).toBe("Sum({$}Sales)");

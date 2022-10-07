@@ -92,7 +92,7 @@ const Step1: React.FC<Props> = (props) => {
             <Grid.Col span='auto'>
               <InputWithTooltip
                 inputField={<TextInput
-                  value={valueFieldExpression}
+                  defaultValue={valueFieldExpression}
                   placeholder="field name | bookmark name"
                   withAsterisk
                   onChange={(e) => handleFieldChange(e.target.value)}
@@ -108,7 +108,7 @@ const Step1: React.FC<Props> = (props) => {
           <Grid>
             <Grid.Col>
               <Textarea
-                value={valuePersonalComment}
+                defaultValue={valuePersonalComment}
                 placeholder='Personal notes (optional)'
                 autosize
                 minRows={2}

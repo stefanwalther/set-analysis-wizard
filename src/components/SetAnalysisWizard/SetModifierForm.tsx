@@ -12,7 +12,7 @@ import {
 } from '@mantine/core';
 import React, {ChangeEvent} from 'react';
 import InputWithTooltip from "../InputWithTooltip";
-import {IFieldOperator, ISetModifierActionGroup} from "../../common/interfaces";
+import {IFieldOperator, ISetModifier, ISetModifierActionGroup} from "../../common/interfaces";
 import {useAppDispatch, useAppSelector} from "../../common/hooks";
 import {
   selectFieldOperators,
@@ -21,18 +21,18 @@ import {
 } from "../../features/resources/resourcesSlice";
 import {IconCheck, IconCopy, IconX} from "@tabler/icons";
 import SetModifierDescription from "./SetModifierDescription";
-import {addSetModifier, setModifierModalVisibility} from "../../features/wizard/wizardSlice";
+import {saveSetModifier, setModifierModalVisibility} from "../../features/wizard/wizardSlice";
 import {
+  initSMFormState,
   selectFieldsVisibility,
   setAction,
   setField,
   setFieldOperator, setIndirectField, setOtherField, setSelectionOperator, setValue1
 } from "../../features/set-modifier-form/setModifierFormSlice";
 import {ISelectionOperator} from "../../common/interfaces/ISelectionOperator";
-import {SetModifier} from "../../common/models/SetModifier";
 
 interface Props {
-  state: SetModifier
+  state: ISetModifier
 }
 
 const SetModifierForm: React.FC<Props> = ({state}: Props) => {
@@ -48,7 +48,9 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
   }
 
   const handleSave = () => {
-    dispatch(addSetModifier(state));
+    // Handles both add & save scenarios ...
+    dispatch(saveSetModifier(state));
+    dispatch(initSMFormState());
     dispatch(setModifierModalVisibility(false));
   }
 
@@ -80,7 +82,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
                                 data={itemsSetModifierActionGroups}
                                 placeholder='Select one of the actions'
                                 allowDeselect
-                                value={state.Action}
+                                value={state?.Action}
                                 styles={(theme) => ({
                                   separatorLabel: {
                                     fontWeight: 'bold',
@@ -225,7 +227,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
         <SetModifierDescription
           id='sm_description'
           hidden={false}
-          value={state.getDescription()}
+          value={state.Explanation ?? ''}
         />
       </Container>
 

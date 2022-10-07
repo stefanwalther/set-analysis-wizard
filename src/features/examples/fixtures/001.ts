@@ -6,7 +6,7 @@ const item: ISetAnalysisDefinitionProps = {
   FieldExpression: "Sales",
   PersonalComment: "Calculate the sum of \"Sales\" (based on the current selection).",
   Expression: "Sum({$}Sales)",
-  SetModifiers: undefined,
+  SetModifiers: [],
 }
 
 export default item;

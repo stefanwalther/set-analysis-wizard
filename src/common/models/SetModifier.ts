@@ -1,8 +1,9 @@
 import {bracketize, nullOrEmpty} from "../utils";
 import {qualifyElement} from "../set-analysis-utils";
+import {ISetModifier} from "../interfaces";
 
 // Todo: add a ctor to make it easier to work with this class
-export class SetModifier {
+export class SetModifier{
 
   public Action: string = '';                 // Action
   public Field: string = '';                  // Field
@@ -14,13 +15,26 @@ export class SetModifier {
   public IndirectField: string = '';          // Indirect Field for Indirect Set Selections
   public TechnicalModifier: string = '';      // The expression for the set modifier
 
+  constructor(props: ISetModifier) {
+    this.Action = props.Action;
+    this.Field = props.Field;
+    this.OtherField = props.OtherField;
+    this.FieldOperator = props.FieldOperator;
+    this.ValuesOrExpression_1 = props.ValuesOrExpression_1;
+    this.ValuesOrExpression_2 = props.ValuesOrExpression_2;
+    this.SelectionOperator = props.SelectionOperator;
+    this.IndirectField = props.IndirectField;
+    this.TechnicalModifier = props.TechnicalModifier;
+  }
+
+
   // Todo: FieldOperator should be an enum
   // -----------------------------------------------------------------
   // getFieldOperatorDescription()
   // ~~
   // Note: does only work, if `FieldOperator` has already been set
   // -----------------------------------------------------------------
-  getFieldOperatorDescription() {
+  private getFieldOperatorDescription() {
     switch (this.FieldOperator) {
       case "=":
         return "Select records";
@@ -43,7 +57,7 @@ export class SetModifier {
   // ~~
   // Get the technical modifier
   // -----------------------------------------------------------------
-  getModifier() {
+  private getModifier() {
     let indirectField: string = '';
     let technicalModifier: string = '';
     switch (this.Action) {
@@ -84,7 +98,7 @@ export class SetModifier {
   }
 
   // Todo: Selection Operator should be an enum
-  getFieldOperation(isExp: boolean = false) {
+  private getFieldOperation(isExp: boolean = false) {
 
     // Can be made easier ... just define mask1 and mask2 ... :)
     switch (this.SelectionOperator) {
@@ -126,7 +140,7 @@ export class SetModifier {
     }
   }
 
-  getSelectionOperatorDesc() {
+  private getSelectionOperatorDesc() {
     switch (this.SelectionOperator) {
       case "equal_to":
         return "equal to \"{val1}\"";
@@ -161,7 +175,7 @@ export class SetModifier {
   // -----------------------------------------------------------------
   // getDescription
   // -----------------------------------------------------------------
-  getDescription(): string {
+  public getDescription(): string {
 
     let indirectField = (nullOrEmpty(this.IndirectField) ? this.Field : this.IndirectField);
     //return this.GetFieldOperatorDescription() + ' the value' + ((this.HasMultipleValues()) ? 's ' : ' ') + "\"" + this.ValuesOrExpression_1 + '\" in field \"' + this.Field + "\"";
@@ -184,5 +198,4 @@ export class SetModifier {
         return '';
     }
   }
-
 }

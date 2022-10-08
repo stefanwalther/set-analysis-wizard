@@ -1,4 +1,4 @@
-import {SetAnalysisEngine} from "./setAnalysisEngine";
+import {SetAnalysisEngine} from "./SetAnalysisEngine";
 
 describe('setAnalysisEngine', () => {
   const sae = new SetAnalysisEngine();

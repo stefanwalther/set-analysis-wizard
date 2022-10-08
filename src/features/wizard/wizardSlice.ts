@@ -1,8 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../state";
-import {ISetIdentifierGroup, setModifierInitialValues} from "../../common/interfaces";
+import {ISetIdentifierGroup} from "../../common/interfaces";
 import {ISetModifier} from "../../common/interfaces";
 import {ISetAnalysisDefinitionProps} from "./interfaces/ISetAnalysisDefinitionProps";
+import {SetAnalysisEngine} from "../../common/models/SetAnalysisEngine";
 
 interface WizardState {
   currentWizardStep: number;
@@ -15,12 +16,31 @@ const initialState: WizardState = {
   currentWizardStep: 1,
   modifierModalOpen: false,
   selectedSetIdentifier: undefined,
-  // currentSetModifierFormValue: setModifierInitialValues,
   value: {
     FieldExpression: "",
     SetIdentifier: "",
     AggregationType: "",
     SetModifiers: []
+  }
+}
+
+const calcExpression = (props: ISetAnalysisDefinitionProps): string => {
+  let engine = new SetAnalysisEngine(props);
+  engine.Calculate();
+  return engine.Expression;
+}
+
+interface IResult {
+  Expression: string;
+  ExpressionWithComments: string;
+}
+
+const calcResult = (props: ISetAnalysisDefinitionProps): IResult => {
+  let engine = new SetAnalysisEngine(props);
+  engine.Calculate();
+  return {
+    Expression: engine.Expression,
+    ExpressionWithComments: engine.PureDescription || ""
   }
 }
 
@@ -33,27 +53,26 @@ export const wizardSlice = createSlice({
     },
     setCurrentWizardStep: (state: WizardState, action: PayloadAction<number>) => {
       state.currentWizardStep = action.payload;
-      return state;
     },
     setModifierModalVisibility: (state: WizardState, action: PayloadAction<boolean>) => {
       state.modifierModalOpen = action.payload;
-      return state;
     },
     setValueSetIdentifier: (state: WizardState, action: PayloadAction<string>) => {
       state.value.SetIdentifier = action.payload;
-      return state;
+      state.value.Expression = calcResult(state.value).Expression;
+      state.value.ExpressionWithComments = calcResult(state.value).ExpressionWithComments;
     },
     setValueAggregationType: (state: WizardState, action: PayloadAction<string>) => {
       state.value.AggregationType = action.payload;
-      return state;
+      state.value.Expression = calcExpression(state.value);
     },
     setValueFieldExpression: (state: WizardState, action: PayloadAction<string>) => {
       state.value.FieldExpression = action.payload;
-      return state;
+      state.value.Expression = calcExpression(state.value);
     },
     setValuePersonalComment: (state: WizardState, action: PayloadAction<string>) => {
       state.value.PersonalComment = action.payload;
-      return state;
+      state.value.Expression = calcExpression(state.value);
     },
     saveSetModifier: (state: WizardState, action: PayloadAction<ISetModifier>) => {
 
@@ -69,15 +88,15 @@ export const wizardSlice = createSlice({
       } else {
         state.value.SetModifiers?.push(Object.assign({}, action.payload));
       }
-      return state;
+      state.value.Expression = calcExpression(state.value);
     },
     resetModifiers: (state: WizardState) => {
       state.value.SetModifiers = [];
-      return state;
+      state.value.Expression = calcExpression(state.value);
     },
     deleteModifier: (state: WizardState, action: PayloadAction<number>) => {
       state.value.SetModifiers.splice(action.payload, 1);
-      return state;
+      state.value.Expression = calcExpression(state.value);
     }
   }
 });

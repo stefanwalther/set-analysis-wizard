@@ -8,7 +8,8 @@ export interface ISetAnalysisDefinitionProps {
   FieldExpression: string;
   Bookmark?: string;
   PersonalComment?: string;
-  PureDescription?: string;
   Expression?: string;
   SetModifiers: ISetModifier[];
+  PureDescription?: string;
+  ExpressionWithComments?: string;
 }

@@ -1,5 +1,7 @@
-import {ISetAnalysisDefinitionProps} from "./interfaces/ISetAnalysisDefinitionProps";
-import {bracketize, multiplyString} from "../../common/utils";
+import {bracketize, multiplyString} from "../utils";
+import {ISetModifier} from "../interfaces";
+import {ISetAnalysisDefinitionProps} from "../../features/wizard/interfaces/ISetAnalysisDefinitionProps";
+import {SetModifier} from "./SetModifier";
 
 export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
   SetIdentifier: string = "$";
@@ -12,9 +14,9 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
   Expression: string = "";
   PureDescription?: string;
 
-  SetModifiers: any[] = [];
+  SetModifiers: ISetModifier[] = [];
 
-  constructor();
+  // constructor();
   constructor(props?: ISetAnalysisDefinitionProps) {
     if (typeof props !== 'undefined') {
       Object.assign(this, props);
@@ -23,13 +25,14 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
 
   public Calculate = () => {
     this.Expression = this.getSaExpression();
+    this.PureDescription = this.getDescription();
   }
 
   public Init = (props: ISetAnalysisDefinitionProps) => {
     Object.assign(this, props);
   }
 
-  public getSaExpression = () : string => {
+  public getSaExpression = (): string => {
 
     // {aggr_type}({{set_expression}}{field_expression})
     // sum({{set_expression}}{field_expression})
@@ -60,7 +63,7 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
     }
   }
 
-  public getDescription = (saveOnServer: boolean = false) => {
+  public getDescription = () => {
 
     // Constants
     const cSepMain = "// ---------------------------------------------------------------------\n";    // Main Separator
@@ -68,7 +71,7 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
     const cLB = "\n";                                                                                 // Line Break
     const cMarkerEndMain = "";                                                                        // Marker for the main set
 
-    let descriptionFinal = this.initPureDescription(saveOnServer);
+    let descriptionFinal = this.initPureDescription();
     descriptionFinal = descriptionFinal.replace(/{cSepMain}/g, cSepMain);
     descriptionFinal = descriptionFinal.replace(/{cComment}/g, cComment);
     descriptionFinal = descriptionFinal.replace(/{cLB}/g, cLB);
@@ -78,11 +81,7 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
 
   }
 
-  public initPureDescription = (saveOnServer: boolean = false) => {
-
-    if (saveOnServer == null || typeof saveOnServer === 'undefined') {
-      saveOnServer = false;
-    }
+  public initPureDescription = () => {
 
     let desc = '';
 
@@ -107,7 +106,7 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
       // 3rd line
       let sm_d = []; //temporary array for building the string
       for (let i = 0; i < this.SetModifiers.length; i++) {
-        sm_d.push('{cComment}' + multiplyString(' ', 5) + '- ' + this.SetModifiers[i].GetDescription());
+        sm_d.push('{cComment}' + multiplyString(' ', 5) + '- ' + this.SetModifiers[i] /* getDescription() */);
       }
       desc += sm_d.join('{cLB}');
 
@@ -125,15 +124,16 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
 
 
     // Todo(2022): needs to changed ...
-    desc += "{cComment}~~~~{cLB}";
-    if (saveOnServer) {
-      desc += "{cComment}Reopen or share this result by using the following Url:{cLB}";
-      desc += "{cComment}http://tools.qlikblog.at/SetAnalysisWizard/?sa={cLB}";
-    }
-    else {
-      desc += "{cComment}Created by http://tools.qlikblog.at/SetAnalysisWizard/ {cLB}";
-    }
+    // desc += "{cComment}~~~~{cLB}";
+    // if (saveOnServer) {
+    //   desc += "{cComment}Reopen or share this result by using the following Url:{cLB}";
+    //   desc += "{cComment}http://tools.qlikblog.at/SetAnalysisWizard/?sa={cLB}";
+    // }
+    // else {
+    // }
 
+    // Todo(2022): add something else here ...
+    //desc += "{cComment}Created by http://tools.qlikblog.at/SetAnalysisWizard/ {cLB}";
 
     // sep-end
     desc += "{cSepMain}";
@@ -145,8 +145,7 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
   }
 
 
-  /// private
-
+  /// private methods
 
   // Return the base template for the set analysis expression
   private getBaseTemplate = (): string => {
@@ -158,7 +157,7 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
 
   // Return the Set identifier from combo box
   // (1 | $ | $N |$_N | bookmark_id | bookmark_name)
-   private getSetIdentifier = (): string => {
+  private getSetIdentifier = (): string => {
 
     // Deal with the special case of bookmarks
     // In any other case just return the set identifier ...
@@ -194,11 +193,12 @@ export class SetAnalysisEngine implements ISetAnalysisDefinitionProps {
   private getSetModifier = () => {
 
     let retVal = "";
-    if (this.SetModifiers !== null && this.SetModifiers.length > 0) {
+    if (typeof this.SetModifiers !== 'undefined' && this.SetModifiers !== null && this.SetModifiers.length > 0) {
 
       let sm = [];
       for (let i = 0; i < this.SetModifiers.length; i++) {
-        sm.push(this.SetModifiers[i].GetModifier());
+        let smExpression = new SetModifier(this.SetModifiers[i]);
+        sm.push(smExpression.getModifier());
       }
       retVal = sm.join(',');
     }

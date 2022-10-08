@@ -57,7 +57,7 @@ export class SetModifier{
   // ~~
   // Get the technical modifier
   // -----------------------------------------------------------------
-  private getModifier() {
+  public getModifier() {
     let indirectField: string = '';
     let technicalModifier: string = '';
     switch (this.Action) {

@@ -35,8 +35,7 @@ const qualifyElement = (el: any, mask: any = '', isWildCardExp: boolean = false)
       // Here we should decide if we have an array of numbers, strings or mixed
       if (isNumber(val)) {
         stringDel = '';
-      }
-      else {
+      } else {
         stringDel = '\'';
       }
       newVal = (!nullOrEmpty(mask)) ? mask.replace('{0}', values[i]) : values[i];
@@ -49,9 +48,11 @@ const qualifyElement = (el: any, mask: any = '', isWildCardExp: boolean = false)
     }
     return returnArr.join(',');
   }
+
   // we just have a single string
+  // it will be trimmed in any case
   else {
-    return (!nullOrEmpty(mask)) ? mask.replace('{0}', el) : "'" + el + "'";
+    return (!nullOrEmpty(mask)) ? mask.replace('{0}', el.trim()) : "'" + el.trim() + "'";
   }
 }
 

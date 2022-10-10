@@ -42,42 +42,57 @@ const setActionVisibilityLogic = (state: SetModifierFormState, action?: ActionEn
 
   switch (action) {
     case ActionEnum.set_remove:
-      s.sm_field = true;
+      // sections
       s.sm_section_field = true;
       s.sm_section_preview = true;
+
+      s.sm_field = true;
       break;
     case ActionEnum.set_select_additionally:
     case ActionEnum.set_modify_by_value:
+      // sections
+      s.sm_section_field = true;
+      s.sm_section_condition = true;
+      s.sm_section_preview = true;
+
       s.sm_field = true;
       s.sm_field_operator = true;
       s.sm_field_operator_in = true;
       s.sm_selection_operator = true;
       s.sm_value_1 = true;
-      s.sm_section_condition = true;
-      s.sm_section_preview = true;
       break;
     case ActionEnum.set_modify_by_expression:
+      // sections
+      s.sm_section_field = true;
+      s.sm_section_condition = true;
+      s.sm_section_preview = true;
+
       s.sm_field = true;
       s.sm_field_operator = true;
       s.sm_field_operator_in = true;
-      s.sm_field_operator = true;
+      s.sm_selection_operator = true;
       s.sm_value_1 = true;
-      s.sm_section_condition = true;
-      s.sm_section_preview = true;
       break;
     case ActionEnum.set_pindirect:
     case ActionEnum.set_eindirect:
+      // sections
+      s.sm_section_field = true;
+      s.sm_section_condition = true;
+      s.sm_section_preview = true;
+
       s.sm_field = true;
       s.sm_field_operator_in = true;
       s.sm_selection_operator = true;
       s.sm_selection_operator = true;
       s.sm_value_1 = true;
       s.sm_indirect_field = true;
-      s.sm_section_condition = true;
-      s.sm_section_preview = true;
+      s.sm_other_field = true;
       break;
     case ActionEnum.set_pindirect_exp:
     case ActionEnum.set_eindirect_exp:
+      // sections
+      s.sm_section_field = true;
+
       s.sm_field = true;
       s.sm_field_operator = true;
       s.sm_field_operator_in = true;
@@ -197,8 +212,8 @@ const initialState: SetModifierFormState = {
     sm_description: false,
 
     // sections
-    sm_section_condition: false,
     sm_section_field: false,
+    sm_section_condition: false,
     sm_section_preview: false,
   },
   // values: {
@@ -224,7 +239,7 @@ export const setModifierFormSlice = createSlice({
   name: 'modifier-modal',
   initialState,
   reducers: {
-    initSMFormState: (state) => {
+    initFormState: (state) => {
       state.formState = setModifierInitialValues();
       setActionVisibilityLogic(state, state.formState.Action);
       return state;
@@ -288,7 +303,8 @@ export const setModifierFormSlice = createSlice({
 });
 
 export const {
-  initSMFormState,
+  initFormState,
+  resetFormSate,
   setAction,
   setField,
   setFieldOperator,

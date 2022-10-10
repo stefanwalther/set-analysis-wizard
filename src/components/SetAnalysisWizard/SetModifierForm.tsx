@@ -23,7 +23,7 @@ import {IconCheck, IconCopy, IconX} from "@tabler/icons";
 import SetModifierDescription from "./SetModifierDescription";
 import {saveSetModifier, setModifierModalVisibility} from "../../features/wizard/wizardSlice";
 import {
-  initSMFormState,
+  initFormState,
   selectFieldsVisibility,
   setAction,
   setField,
@@ -50,8 +50,12 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
   const handleSave = () => {
     // Handles both add & save scenarios ...
     dispatch(saveSetModifier(state));
-    dispatch(initSMFormState());
+    dispatch(initFormState());
     dispatch(setModifierModalVisibility(false));
+  }
+
+  const handleResetForm = () => {
+    dispatch(initFormState());
   }
 
   const itemsSetModifierActionGroups: SelectItem[] = setModifierActionGroups?.flatMap(group => {
@@ -102,6 +106,8 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
 
           />
         </Grid.Col>
+        {/*// Todo (A): just for debugging purposes*/}
+        {state?.Action}
       </Grid>
 
       <Container id='sm_section_field' hidden={!fieldVisibility.sm_section_field}>
@@ -234,6 +240,8 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
       <Group position='apart' mt='xl' pt={10}>
         <Button variant='subtle' onClick={handleClose} color='gray' style={{fontWeight: 'normal'}} type='submit'
                 leftIcon={<IconX/>}>Discard & close</Button>
+        {/*// Todo (A): Only for debugging reasons*/}
+        <Button variant='subtle' color='gray' type='submit' onClick={handleResetForm}>Reset form</Button>
         <Button onClick={handleSave} color='blue' type='submit' leftIcon={<IconCheck/>}>Save</Button>
       </Group>
 

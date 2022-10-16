@@ -229,6 +229,19 @@ const initialState: SetModifierFormState = {
   formState: setModifierInitialValues()
 }
 
+const calc = (state: SetModifierFormState) => {
+  let sm = new SetModifier(state.formState);
+  state.formState.TechnicalModifier = sm.getModifier();
+  state.formState.Explanation = sm.getDescription();
+  return state;
+}
+
+const calcTechnicalModifier = (state: SetModifierFormState) => {
+  let sm = new SetModifier(state.formState);
+  state.formState.TechnicalModifier = sm.getModifier();
+  return state;
+}
+
 const calcExplanation = (state: SetModifierFormState) => {
   let sm = new SetModifier(state.formState);
   state.formState.Explanation = sm.getDescription();
@@ -256,43 +269,43 @@ export const setModifierFormSlice = createSlice({
     setAction: (state: SetModifierFormState, action: PayloadAction<string | null>) => {
       let typedAction = action.payload as ActionEnum;
       state.formState.Action = typedAction;
-      calcExplanation(state);
+      calc(state);
       setActionVisibilityLogic(state, typedAction);
       return state;
     },
     setField: (state: SetModifierFormState, action: PayloadAction<string>) => {
       state.formState.Field = action.payload;
-      calcExplanation(state);
+      calc(state);
       return state;
     },
     setFieldOperator: (state: SetModifierFormState, action: PayloadAction<string>) => {
       state.formState.FieldOperator = action.payload;
-      calcExplanation(state);
+      calc(state);
       return state;
     },
     setIndirectField: (state: SetModifierFormState, action: PayloadAction<string>) => {
       state.formState.IndirectField = action.payload;
-      calcExplanation(state);
+      calc(state);
       return state;
     },
     setOtherField: (state: SetModifierFormState, action: PayloadAction<string>) => {
       state.formState.OtherField = action.payload;
-      calcExplanation(state);
+      calc(state);
       return state;
     },
     setSelectionOperator: (state: SetModifierFormState, action: PayloadAction<string>) => {
       state.formState.SelectionOperator = action.payload;
-      calcExplanation(state);
+      calc(state);
       return state;
     },
     setValue1: (state: SetModifierFormState, action: PayloadAction<string>) => {
       state.formState.ValuesOrExpression_1 = action.payload;
-      calcExplanation(state);
+      calc(state);
       return state;
     },
     setValue2: (state: SetModifierFormState, action: PayloadAction<string>) => {
       state.formState.ValuesOrExpression_2 = action.payload;
-      calcExplanation(state);
+      calc(state);
       return state;
     },
     resetFormSate: (state: SetModifierFormState) => {

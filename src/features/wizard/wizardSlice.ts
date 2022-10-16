@@ -7,13 +7,15 @@ import {SetAnalysisEngine} from "../../common/models/SetAnalysisEngine";
 
 interface WizardState {
   currentWizardStep: number;
+  highlightedSetModifier: string;
   modifierModalOpen: boolean;
-  selectedSetIdentifier?: ISetIdentifierGroup;
+  selectedSetIdentifier?: ISetIdentifierGroup; // Todo: probably needs to be deleted ...
   value: ISetAnalysisDefinitionProps
 }
 
 const initialState: WizardState = {
   currentWizardStep: 1,
+  highlightedSetModifier: '',
   modifierModalOpen: false,
   selectedSetIdentifier: undefined,
   value: {
@@ -53,6 +55,9 @@ export const wizardSlice = createSlice({
     },
     setCurrentWizardStep: (state: WizardState, action: PayloadAction<number>) => {
       state.currentWizardStep = action.payload;
+    },
+    setHighlightedSetModifier: (state: WizardState, action: PayloadAction<string>) => {
+      state.highlightedSetModifier = action.payload;
     },
     setModifierModalVisibility: (state: WizardState, action: PayloadAction<boolean>) => {
       state.modifierModalOpen = action.payload;
@@ -106,6 +111,7 @@ export const {
   getWizardState,
   resetModifiers,
   setCurrentWizardStep,
+  setHighlightedSetModifier,
   saveSetModifier,
   setModifierModalVisibility,
   setValueSetIdentifier,
@@ -123,6 +129,7 @@ export const selectSerializedState = (state: RootState): string => {
 
 // UI related selectors
 export const selectCurrentWizardStep = (state: RootState): number => state.wizard.currentWizardStep;
+export const selectHighlightedSetModifier = (state: RootState): string => state.wizard.highlightedSetModifier;
 export const selectIsModifierModalOpen = (state: RootState): boolean => state.wizard.modifierModalOpen;
 export const selectWizardValue = (state: RootState): ISetAnalysisDefinitionProps => state.wizard.value;
 

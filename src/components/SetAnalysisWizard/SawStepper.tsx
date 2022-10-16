@@ -2,7 +2,7 @@ import React from 'react';
 import {Stepper, Title} from '@mantine/core';
 import { useAppSelector, useAppDispatch } from '../../common/hooks';
 import {
-  selectCurrentWizardStep,
+  selectCurrentWizardStep, selectHighlightedSetModifier,
   selectWizardValue,
   setCurrentWizardStep
 } from '../../features/wizard/wizardSlice';
@@ -17,6 +17,7 @@ interface Props {
 const SawStepper: React.FC<Props> = (props) => {
 
   const currentStep = useAppSelector(selectCurrentWizardStep);
+  const highlightedSetModifier = useAppSelector(selectHighlightedSetModifier);
   const wizardValue = useAppSelector(selectWizardValue);
 
   const dispatch = useAppDispatch();
@@ -35,12 +36,12 @@ const SawStepper: React.FC<Props> = (props) => {
         <Stepper.Step label='Define the Set' description='Start with an expression'>
           <Step1 />
           <Title order={4}>Preview</Title>
-          <Expression expression={wizardValue.Expression} onClick={goToResult}></Expression>
+          <Expression expression={wizardValue.Expression} highlightedText={highlightedSetModifier} onClick={goToResult}></Expression>
         </Stepper.Step>
         <Stepper.Step label='Modify the Set' description='Add one ore mor modifier(s)'>
           <Step2 />
           <Title order={4}>Preview</Title>
-          <Expression expression={wizardValue.Expression} onClick={goToResult}></Expression>
+          <Expression expression={wizardValue.Expression} highlightedText={highlightedSetModifier} onClick={goToResult}></Expression>
         </Stepper.Step>
         <Stepper.Step label='Get the Output' description='Retrieve the output'>
           <Step3 expressionWithComments={wizardValue.ExpressionWithComments ?? ''} />

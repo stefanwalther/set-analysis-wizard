@@ -1,10 +1,12 @@
 import React from 'react';
+import {Highlight} from '@mantine/core';
 
 interface Props {
   expression?: string;
+  highlightedText?: string;
   onClick: () => void;
 }
-const Expression: React.FC<Props> = ({expression, onClick}: Props) => {
+const Expression: React.FC<Props> = ({expression, highlightedText, onClick}: Props) => {
 
   const handleClick= () => {
     onClick();
@@ -12,7 +14,9 @@ const Expression: React.FC<Props> = ({expression, onClick}: Props) => {
 
   return (
     <div onClick={handleClick}>
-      {expression}
+      <Highlight highlight={highlightedText ?? ''}>
+      {expression ?? ''}
+      </Highlight>
     </div>
   );
 }

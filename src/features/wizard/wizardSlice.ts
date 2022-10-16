@@ -4,6 +4,8 @@ import {ISetIdentifierGroup} from "../../common/interfaces";
 import {ISetModifier} from "../../common/interfaces";
 import {ISetAnalysisDefinitionProps} from "./interfaces/ISetAnalysisDefinitionProps";
 import {SetAnalysisEngine} from "../../common/models/SetAnalysisEngine";
+import { v4 as uuidv4 } from 'uuid';
+import {nullOrEmpty} from "../../common/utils";
 
 interface WizardState {
   currentWizardStep: number;
@@ -81,17 +83,21 @@ export const wizardSlice = createSlice({
     },
     saveSetModifier: (state: WizardState, action: PayloadAction<ISetModifier>) => {
 
-      let id = action.payload.uid;
+      let uid = action.payload.uid;
 
-      if (state.value.SetModifiers.find((item) => item.uid === id)) {
+      if (state.value.SetModifiers.find((item) => item.uid === uid)) {
         state.value.SetModifiers = state.value.SetModifiers.map((item) => {
-          if (item.uid === id) {
+          if (item.uid === uid) {
             return Object.assign({}, action.payload);
           }
           return item;
         })
       } else {
-        state.value.SetModifiers?.push(Object.assign({}, action.payload));
+        let newSetModifier = Object.assign({}, action.payload);
+        if (nullOrEmpty(newSetModifier.uid)) {
+          newSetModifier.uid = uuidv4()
+        }
+        state.value.SetModifiers?.push(newSetModifier);
       }
       state.value.Expression = calcExpression(state.value);
     },

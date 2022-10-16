@@ -1,5 +1,4 @@
 import {ActionEnum} from "../../features/set-modifier-form/enums/ActionEnum";
-import { v4 as uuidv4 } from 'uuid';
 
 export interface ISetModifier {
   uid: string;                    // This is the unique identifier of the set modifier
@@ -17,7 +16,7 @@ export interface ISetModifier {
 
 export function setModifierInitialValues(): ISetModifier {
    return {
-     uid: uuidv4(),
+     uid: '',
      Action: ActionEnum.undefined,
      Field: '',
      OtherField: '',

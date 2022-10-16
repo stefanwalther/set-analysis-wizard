@@ -5,6 +5,7 @@ import {selectIsModifierModalOpen, setModifierModalVisibility} from "../../featu
 
 import SetModifierForm from "./SetModifierForm";
 import {selectSetModifier} from "../../features/set-modifier-form/setModifierFormSlice";
+import {nullOrEmpty} from "../../common/utils";
 
 
 interface Props {
@@ -20,14 +21,13 @@ const SetModifierModal: React.FC<Props> = (props) => {
   const handleClose = () => {
     // Todo - decide whether to close the form or not (if eg. dirty)
     dispatch(setModifierModalVisibility(false));
-
   }
 
   return (
     <Modal
       opened={isModalOpen}
       onClose={() => handleClose()}
-      title={'Add/Change Set Modifier'}
+      title={ (nullOrEmpty(setModifierState.uid)) ? 'Add Set Modifier' : 'Change Set Modifier'}
       size='1000px'
       styles={(theme) => ({
         header: {

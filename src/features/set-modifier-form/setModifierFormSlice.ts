@@ -46,6 +46,7 @@ const setActionVisibilityLogic = (state: SetModifierFormState, action?: ActionEn
       s.sm_section_field = true;
       s.sm_section_preview = true;
 
+      // fields
       s.sm_field = true;
       break;
     case ActionEnum.set_select_additionally:
@@ -55,6 +56,7 @@ const setActionVisibilityLogic = (state: SetModifierFormState, action?: ActionEn
       s.sm_section_condition = true;
       s.sm_section_preview = true;
 
+      // fields
       s.sm_field = true;
       s.sm_field_operator = true;
       s.sm_field_operator_in = true;
@@ -67,6 +69,7 @@ const setActionVisibilityLogic = (state: SetModifierFormState, action?: ActionEn
       s.sm_section_condition = true;
       s.sm_section_preview = true;
 
+      // fields
       s.sm_field = true;
       s.sm_field_operator = true;
       s.sm_field_operator_in = true;
@@ -80,6 +83,7 @@ const setActionVisibilityLogic = (state: SetModifierFormState, action?: ActionEn
       s.sm_section_condition = true;
       s.sm_section_preview = true;
 
+      // fields
       s.sm_field = true;
       s.sm_field_operator_in = true;
       s.sm_selection_operator = true;
@@ -93,6 +97,7 @@ const setActionVisibilityLogic = (state: SetModifierFormState, action?: ActionEn
       // sections
       s.sm_section_field = true;
 
+      // fields
       s.sm_field = true;
       s.sm_field_operator = true;
       s.sm_field_operator_in = true;
@@ -184,16 +189,6 @@ interface SetModifierFormState {
     sm_section_field: boolean;
     sm_section_preview: boolean;
   },
-  // values: {
-  //   sm_action: string;
-  //   sm_field_operator: string;
-  //   sm_field: string;
-  //   sm_other_field: string;
-  //   sm_selection_operator: string;
-  //   sm_value_1: string;
-  //   sm_value_2: string;
-  //   sm_indirect_field: string;
-  // },
   formState: ISetModifier
 }
 
@@ -216,16 +211,6 @@ const initialState: SetModifierFormState = {
     sm_section_condition: false,
     sm_section_preview: false,
   },
-  // values: {
-  //   sm_action: '',
-  //   sm_field_operator: '',
-  //   sm_field: '',
-  //   sm_other_field: '',
-  //   sm_selection_operator: '',
-  //   sm_value_1: '',
-  //   sm_value_2: '',
-  //   sm_indirect_field: '',
-  // },
   formState: setModifierInitialValues()
 }
 

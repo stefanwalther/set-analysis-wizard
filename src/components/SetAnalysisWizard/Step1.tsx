@@ -16,6 +16,7 @@ import SetIdentifierSelect from "./SetIdentifierSelect";
 import AggregationTypeSelect from "./AggregationTypeSelect";
 import InputWithTooltip from "../InputWithTooltip";
 import {selectAggregationTypeGroups, selectSetIdentifierGroups} from "../../features/resources/resourcesSlice";
+import {ttPersonalNotes, ttValueFieldExpression} from "../../common/tooltips";
 
 interface Props {
 
@@ -93,11 +94,11 @@ const Step1: React.FC<Props> = (props) => {
               <InputWithTooltip
                 inputField={<TextInput
                   defaultValue={valueFieldExpression}
-                  placeholder="field name | bookmark name"
+                  placeholder="field name | expression | bookmark name"
                   withAsterisk
                   onChange={(e) => handleFieldChange(e.target.value)}
                 />}
-                tooltip="Field name or expression: Enter either a field name or a simple expression here. Examples: Field: Sales, Simple Expression: Sales*FlagBudget</pre><i>Use expressions carefully! Have a look at the QlikView Reference manual for further information!</i><br/><hr /><b>Note:</b><br/>If the field name contains spaces just enter the field name as it is, the necessary brackets ( [ and ] ) will be added automatically."
+                tooltip={ttValueFieldExpression}
                 tooltipWidth={500}
               ></InputWithTooltip>
             </Grid.Col>
@@ -107,14 +108,19 @@ const Step1: React.FC<Props> = (props) => {
         <Grid.Col span={1}>
           <Grid>
             <Grid.Col>
-              <Textarea
-                defaultValue={valuePersonalComment}
-                placeholder='Personal notes (optional)'
-                autosize
-                minRows={2}
-                maxRows={4}
-                onChange={(e) => handlePersonalCommentChange(e.target.value)}
-              ></Textarea>
+              <InputWithTooltip
+                inputField={
+                  <Textarea
+                    defaultValue={valuePersonalComment}
+                    placeholder='Personal notes (optional)'
+                    autosize
+                    minRows={2}
+                    maxRows={4}
+                    onChange={(e) => handlePersonalCommentChange(e.target.value)}
+                  ></Textarea>
+                }
+                tooltip={ttPersonalNotes}
+              />
             </Grid.Col>
           </Grid>
         </Grid.Col>

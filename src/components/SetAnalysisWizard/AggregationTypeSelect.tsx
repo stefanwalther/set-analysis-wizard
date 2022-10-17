@@ -38,10 +38,9 @@ const AggregationTypeSelect: React.FC<Props> = ({list, placeholder, selectedValu
           })}
           onChange={onChange}
         />}
-      tooltip='Select one of the given aggregation types.'
+      tooltip='Select one of the available aggregation functions.'
     ></InputWithTooltip>
 
   )
-
 }
 export default AggregationTypeSelect;

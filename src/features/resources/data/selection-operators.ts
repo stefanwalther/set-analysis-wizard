@@ -44,14 +44,14 @@ export const SELECTION_OPERATORS: ISelectionOperator[] = [
   },
   {
     value: 'between_gt=_lt',
-    label: 'between (&gt;= val1 &lt; val2)',
+    label: 'between (>= val1 < val2)',
   },
   {
     value: 'between_gt=_lt=',
-    label: 'between (&gt;= val1 &lt;= val2)',
+    label: 'between (>= val1 <= val2)',
   },
   {
     value: 'between_gt_lt=',
-    label: 'between (&gt; val1 &lt;= val2)',
+    label: 'between (> val1 <= val2)',
   },
 ];

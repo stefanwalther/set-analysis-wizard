@@ -3,6 +3,8 @@ import './SetIdentifierSelect.scss'
 import {Select, SelectItem, ActionIcon, Grid, Tooltip} from '@mantine/core';
 import {IconInfoCircle} from "@tabler/icons";
 import {ISetIdentifierGroup} from "../../common/interfaces/ISetIdentiferGroup";
+import InputWithTooltip from "../InputWithTooltip";
+import {ttSetIdentifier} from "../../common/tooltips";
 
 interface Props {
   list: ISetIdentifierGroup[];
@@ -10,7 +12,6 @@ interface Props {
   placeholder?: string;
   onChange?: (value: string) => void;
 }
-
 
 
 const SetIdentifierSelect: React.FC<Props> = ({list, selectedKey, placeholder, onChange}: Props) => {
@@ -24,8 +25,8 @@ const SetIdentifierSelect: React.FC<Props> = ({list, selectedKey, placeholder, o
 
   return (
     <div>
-      <Grid>
-        <Grid.Col span='auto' style={{paddingRight: 0}}>
+      <InputWithTooltip
+        inputField={
           <Select
             value={selectedKey}
             placeholder={placeholder}
@@ -44,19 +45,9 @@ const SetIdentifierSelect: React.FC<Props> = ({list, selectedKey, placeholder, o
               }
             })}
           />
-        </Grid.Col>
-        <Grid.Col span='content' style={{paddingLeft: 0, paddingTop: 0}}>
-          <Tooltip
-            label='Set the aggregation function to be used as a starting point for your set.'
-            color='dark'
-            withArrow
-            width={200}
-            multiline
-          >
-            <ActionIcon variant="transparent"><IconInfoCircle size={16} className='info-icon'/></ActionIcon>
-          </Tooltip>
-        </Grid.Col>
-      </Grid>
+        }
+        tooltip={ttSetIdentifier}
+      />
     </div>
   )
 }

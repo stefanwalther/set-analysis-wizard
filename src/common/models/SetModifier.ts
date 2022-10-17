@@ -92,7 +92,7 @@ export class SetModifier{
         technicalModifier = '';
         break;
     } // (switch (Action)
-    debugger;
+    // debugger;
     this.TechnicalModifier = technicalModifier;
     return technicalModifier;
   }

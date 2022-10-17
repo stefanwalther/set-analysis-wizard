@@ -33,6 +33,13 @@ import {ISelectionOperator} from "../../common/interfaces/ISelectionOperator";
 import {openConfirmModal} from "@mantine/modals";
 import {selectEnvironment} from "../../features/ui/uiSlice";
 import {Environment} from "../../common/enums/Environment";
+import {
+  ttSetModifier,
+  ttSmField,
+  ttSmFieldOperation, ttSmIndirectField,
+  ttSmOtherField,
+  ttSmSelectionOperator, ttSmValue1
+} from "../../common/tooltips";
 
 interface Props {
   state: ISetModifier
@@ -126,36 +133,36 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
                                 }}
                               />
                             }
-                            tooltip=''
+                            tooltip={ttSetModifier}
 
           />
         </Grid.Col>
-        {/*// Todo (A): just for debugging purposes*/}
-        {state?.Action}
       </Grid>
 
       <Container id='sm_section_field' hidden={!fieldVisibility.sm_section_field}>
         <Title order={5} pt={20}>Field</Title>
-        <Grid columns={3}>
+        <Grid columns={3} align='flex-end'>
           <Grid.Col pl={20} span='content' style={{width: '50%'}}>
             <InputWithTooltip id='sm_field_operator'
                               hidden={!fieldVisibility.sm_field_operator}
                               inputField={
                                 <Select
                                   data={fieldOperators}
-                                  label='Mode'
+                                  label='Action'
                                   value={state.FieldOperator}
                                   onChange={(value: string) => {
-                                    console.log('changed fieldOperator', value);
                                     dispatch(setFieldOperator(value))
                                   }
                                   }
                                   placeholder='How do you want to change your set?'
                                 />}
-                              tooltip={''}/>
+                              tooltip={ttSmFieldOperation}/>
           </Grid.Col>
-          <Grid.Col span='auto' style={{width: 50}}>
-            <div id='sm_field_operator_in' hidden={!fieldVisibility.sm_field_operator_in} className='align-middle'>in
+          <Grid.Col span='auto' style={{width: 50, textAlign: 'center'}}>
+            <div id='sm_field_operator_in'
+                 hidden={!fieldVisibility.sm_field_operator_in}
+                 className='align-middle'>
+              <b>in</b>
             </div>
           </Grid.Col>
           <Grid.Col span='content' style={{width: '40%'}}>
@@ -172,7 +179,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
                                   }
                                 />
                               }
-                              tooltip=''></InputWithTooltip>
+                              tooltip={ttSmField}></InputWithTooltip>
           </Grid.Col>
         </Grid>
       </Container>
@@ -187,13 +194,12 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
                                 <TextInput
                                   label='"Other Field"'
                                   placeholder='field name'
-                                  style={{width: '200px'}}
                                   defaultValue={state.OtherField}
                                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                     dispatch(setOtherField(e.target.value));
                                   }}
                                 />}
-                              tooltip=''></InputWithTooltip>
+                              tooltip={ttSmOtherField}></InputWithTooltip>
           </Grid.Col>
           <Grid.Col span={2}>
             <Grid columns={4}>
@@ -210,7 +216,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
                       dispatch(setSelectionOperator(value));
                     }}
                   />}
-                tooltip='foo'/>
+                tooltip={ttSmSelectionOperator}/>
               </Grid.Col>
               <Grid.Col span={2}>
                 <InputWithTooltip
@@ -224,7 +230,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
                         dispatch(setValue1(e.target.value));
                       }}
                     />}
-                  tooltip='foo'/>
+                  tooltip={ttSmValue1}/>
               </Grid.Col>
             </Grid>
             <Grid columns={6}>
@@ -240,7 +246,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
                         dispatch(setIndirectField(e.target.value));
                       }}
                     />}
-                  tooltip='foo'
+                  tooltip={ttSmIndirectField}
                 />
               </Grid.Col>
               <Grid.Col span={1} p={0}>

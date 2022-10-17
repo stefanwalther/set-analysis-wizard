@@ -2,7 +2,7 @@
   "name": "set-analysis-wizard",
   "description": "The well known Set Analysis Wizard for QlikView and Qlik Sense.",
   "version": "0.1.0",
-  "homepage": "https://stefanwalther.github.io/set-analysis-wizard",
+  "homepage": "",
   "author": {
     "name": "Stefan Walther",
     "url": "http://qliksite.io"
@@ -43,6 +43,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:production": "react-scripts build && npx serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

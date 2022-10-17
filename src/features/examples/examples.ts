@@ -23,13 +23,19 @@ export const exampleGroups: IExampleGroup[] = [
             sort: 2,
             key: '002',
             formattedTitle: `<b>Count</b> values of field "Customer" based on the <b>current selection</b>`,
-            expression: 'Count({$}Customer)'
+            expression: `Count({$}Customer)`
           },
           {
             sort: 3,
             key: '003',
             formattedTitle: `Sum</b> of "Sales" based on <b>all values</b>, ignoring any selection.`,
-            expression: 'Sum({1}Sales)'
+            expression: `Sum({1}Sales)`
+          },
+          {
+            sort: 4,
+            key: '004',
+            formattedTitle: `<b>Sum</b> of "Sales" based on the <b>bookmark with the ID</b> "BM01".`,
+            expression: `Sum({BM01}Sales)`
           }
         ]
       }

@@ -5,7 +5,7 @@ const item: ISetAnalysisDefinitionProps = {
   "AggregationType": "Count",
   "FieldExpression": "Customer",
   "Bookmark": "",
-  "PersonalComment": "Count values of field \"Customer\" based on the current selection",
+  "PersonalComment": "Count values of field \"Customer\" based on the current selection.",
   "Expression": "Count({$}Customer)",
   "SetModifiers": []
 }

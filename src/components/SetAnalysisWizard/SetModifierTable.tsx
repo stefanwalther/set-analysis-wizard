@@ -72,7 +72,7 @@ const SetModifierTable: React.FC<Props> = ({modifiers}: Props) => {
 
   const rowsEmpty = () => (
     <tr>
-      <td colSpan={5} style={{height: '260px'}}>
+      <td colSpan={5} style={{height: '298px'}}>
         <Box
           sx={(theme) => ({
             textAlign: 'center',
@@ -95,7 +95,7 @@ const SetModifierTable: React.FC<Props> = ({modifiers}: Props) => {
       borderWidth: 1
     }}>
       <Table striped highlightOnHover>
-        <thead>
+        <thead hidden={modifiers.length === 0}>
         <tr style={{height: '20px'}}>
           <th>Set Modifier</th>
           <th colSpan={4} style={{textAlign: 'center'}}>Actions</th>

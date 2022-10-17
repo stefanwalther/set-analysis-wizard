@@ -221,17 +221,17 @@ const calc = (state: SetModifierFormState) => {
   return state;
 }
 
-const calcTechnicalModifier = (state: SetModifierFormState) => {
-  let sm = new SetModifier(state.formState);
-  state.formState.TechnicalModifier = sm.getModifier();
-  return state;
-}
+// const calcTechnicalModifier = (state: SetModifierFormState) => {
+//   let sm = new SetModifier(state.formState);
+//   state.formState.TechnicalModifier = sm.getModifier();
+//   return state;
+// }
 
-const calcExplanation = (state: SetModifierFormState) => {
-  let sm = new SetModifier(state.formState);
-  state.formState.Explanation = sm.getDescription();
-  return state;
-}
+// const calcExplanation = (state: SetModifierFormState) => {
+//   let sm = new SetModifier(state.formState);
+//   state.formState.Explanation = sm.getDescription();
+//   return state;
+// }
 
 export const setModifierFormSlice = createSlice({
   name: 'modifier-modal',

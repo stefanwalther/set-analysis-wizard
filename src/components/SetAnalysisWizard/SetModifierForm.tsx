@@ -30,6 +30,7 @@ import {
   setFieldOperator, setIndirectField, setOtherField, setSelectionOperator, setValue1
 } from "../../features/set-modifier-form/setModifierFormSlice";
 import {ISelectionOperator} from "../../common/interfaces/ISelectionOperator";
+import {openConfirmModal} from "@mantine/modals";
 
 interface Props {
   state: ISetModifier
@@ -61,7 +62,22 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
   /**
    * Handles the event to discard changes, and close the form.
    */
-  const handleDiscardClose = () => {
+  const handleDiscardClose = () => openConfirmModal({
+    title: 'Please confirm your action',
+    children: (
+      <Text size="sm">
+        Do you want to discard your changes and close the form?<br/>
+        Note: Any changes made to this Set Modifier will be lost!
+      </Text>
+    ),
+    labels: { confirm: 'Continue', cancel: 'Cancel' },
+    confirmProps: { color: 'red' },
+    onCancel: () => {},
+    onConfirm: () => discardAndClose(),
+    zIndex: 1
+  });
+
+  const discardAndClose = () => {
     dispatch(initFormState());
     dispatch(setModifierModalVisibility(false));
   }

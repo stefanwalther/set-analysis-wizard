@@ -35,6 +35,7 @@ const SetModifierModal: React.FC<Props> = (props) => {
           fontSize: '1.3rem'
         }
       })}
+      zIndex={0}
     >
       <SetModifierForm state={setModifierState}/>
     </Modal>

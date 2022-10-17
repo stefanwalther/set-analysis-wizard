@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../state";
+import {Environment} from "../../common/enums/Environment";
 
 interface UIState {
   /**
@@ -7,12 +8,13 @@ interface UIState {
    */
   appLoading: boolean,
   isSettingsDrawerOpen: boolean,
+  environment: Environment
 }
 
 const initialState: UIState = {
   appLoading: false,
-  isSettingsDrawerOpen: false
-
+  isSettingsDrawerOpen: false,
+  environment: process.env.NODE_ENV as Environment
 }
 
 export const uiSlice = createSlice({
@@ -33,4 +35,6 @@ export const uiSlice = createSlice({
 export const {getUiState,setSettingsDrawerVisibility} = uiSlice.actions;
 export default uiSlice.reducer;
 
+// selectors
 export const selectIsSettingDrawerOpen = (state: RootState): boolean => state.ui.isSettingsDrawerOpen;
+export const selectEnvironment = (state: RootState): string => state.ui.environment;

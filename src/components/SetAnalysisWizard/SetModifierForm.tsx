@@ -31,6 +31,8 @@ import {
 } from "../../features/set-modifier-form/setModifierFormSlice";
 import {ISelectionOperator} from "../../common/interfaces/ISelectionOperator";
 import {openConfirmModal} from "@mantine/modals";
+import {selectEnvironment} from "../../features/ui/uiSlice";
+import {Environment} from "../../common/enums/Environment";
 
 interface Props {
   state: ISetModifier
@@ -43,6 +45,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
   const selectionOperators: ISelectionOperator[] = useAppSelector(selectSelectionOperators);
   const setModifierActionGroups: ISetModifierActionGroup[] = useAppSelector(selectSetModifierActionGroups);
   const fieldVisibility = useAppSelector(selectFieldsVisibility);
+  const environment = useAppSelector(selectEnvironment);
 
   const handleActionChange = (value: string | null) => {
     dispatch(setAction(value))
@@ -70,9 +73,10 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
         Note: Any changes made to this Set Modifier will be lost!
       </Text>
     ),
-    labels: { confirm: 'Continue', cancel: 'Cancel' },
-    confirmProps: { color: 'red' },
-    onCancel: () => {},
+    labels: {confirm: 'Continue', cancel: 'Cancel'},
+    confirmProps: {color: 'red'},
+    onCancel: () => {
+    },
     onConfirm: () => discardAndClose(),
     zIndex: 1
   });
@@ -260,8 +264,8 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
       <Group position='apart' mt='xl' pt={10}>
         <Button variant='subtle' onClick={handleDiscardClose} color='gray' style={{fontWeight: 'normal'}} type='submit'
                 leftIcon={<IconX/>}>Discard & close</Button>
-        {/*// Todo (A): Only for debugging reasons*/}
-        <Button variant='subtle' color='gray' type='submit' onClick={handleResetForm}>Reset form</Button>
+        <Button variant='subtle' color='gray' type='submit' onClick={handleResetForm}
+                hidden={environment === Environment.Test}>Reset form</Button>
         <Button onClick={handleSave} color='blue' type='submit' leftIcon={<IconCheck/>}>Save</Button>
       </Group>
 

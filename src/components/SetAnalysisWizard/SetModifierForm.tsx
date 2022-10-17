@@ -58,6 +58,14 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
     dispatch(initFormState());
   }
 
+  /**
+   * Handles the event to discard changes, and close the form.
+   */
+  const handleDiscardClose = () => {
+    dispatch(initFormState());
+    dispatch(setModifierModalVisibility(false));
+  }
+
   const itemsSetModifierActionGroups: SelectItem[] = setModifierActionGroups?.flatMap(group => {
     const groupName = group.label;
     return group.items.map(item => {
@@ -65,10 +73,6 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
     });
   });
 
-  const handleClose = () => {
-    dispatch(setModifierModalVisibility(false));
-    // Todo: reset form
-  }
 
   return (
     <Paper shadow='0' p='md'>
@@ -238,7 +242,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
       </Container>
 
       <Group position='apart' mt='xl' pt={10}>
-        <Button variant='subtle' onClick={handleClose} color='gray' style={{fontWeight: 'normal'}} type='submit'
+        <Button variant='subtle' onClick={handleDiscardClose} color='gray' style={{fontWeight: 'normal'}} type='submit'
                 leftIcon={<IconX/>}>Discard & close</Button>
         {/*// Todo (A): Only for debugging reasons*/}
         <Button variant='subtle' color='gray' type='submit' onClick={handleResetForm}>Reset form</Button>

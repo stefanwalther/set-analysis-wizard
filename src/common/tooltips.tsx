@@ -41,7 +41,7 @@ export const ttPersonalNotes = (
   </div>
 );
 
-export const ttSetModifier = (
+export const ttSmAction = (
   <div>
     <b>Select one of the predefined actions:</b><br/><br/>Depending on the selected action you'll be able to set the
     desired parameters.

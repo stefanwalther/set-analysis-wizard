@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {RootState} from "../../state";
 
 interface ExamplesState {
   selectedGroup: string;

@@ -10,6 +10,7 @@ import Examples from "./pages/Examples";
 import About from "./pages/About";
 import Help from "./pages/Help";
 import Start from "./pages/Start";
+import FAQ from "./pages/FAQ";
 
 const NAV_LINKS = [
   {
@@ -35,6 +36,11 @@ const NAV_LINKS = [
     ]
   },
   {
+    key: 'faq',
+    route: '/faq',
+    label: `FAQ`
+  },
+  {
     key: 'about',
     route: '/about',
     label: 'About',
@@ -49,10 +55,11 @@ function App() {
         <Container className='app-container' size={960}>
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/about' element={<About/>}/>
+            <Route path='/start' element={<Start />} />
             <Route path='/help' element={<Help/>}/>
             <Route path='/examples' element={<Examples/>}/>
-            <Route path='/start' element={<Start />} />
+            <Route path='/faq' element={<FAQ/>}/>
+            <Route path='/about' element={<About/>}/>
           </Routes>
         </Container>
       </div>

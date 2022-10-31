@@ -3,7 +3,6 @@ import {useDisclosure} from '@mantine/hooks';
 import {IconChevronDown} from '@tabler/icons';
 import Logo from "./Logo";
 import {
-  Link,
   useNavigate,
 } from 'react-router-dom';
 
@@ -60,7 +59,6 @@ export function NavHeader({links}: HeaderSearchProps) {
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
       <Menu.Item key={item.route} onClick={(e: any) => {
-        console.log('clicked 2');
         e.preventDefault();
       }}>{item.label}</Menu.Item>
     ));

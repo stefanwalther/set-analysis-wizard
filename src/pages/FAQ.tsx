@@ -1,5 +1,5 @@
 import React from 'react';
-import {questionsAndAnswers} from './../../src/common/questions-answers'
+import {questionsAndAnswers} from '../common/questions-answers'
 
 interface Props {}
 

@@ -48,5 +48,9 @@ export const questionsAndAnswers: IQuestionsAndAnswer[] = [
   {
    "q": `Can you recommend any good resources to learn more about Set Analysis?`,
    "a": `Yes, sure. Go to the "Help" section, where I have listed some good resources.`
+  },
+  {
+    "q": `Why do you track usage-data with Google Analytics?`,
+    "a": `Very simple, I am interested if my efforts pay off and how many users are still using this tool ... ;-)`
   }
 ]

@@ -1,16 +1,5 @@
-import {
-  Grid,
-  Select,
-  Text,
-  TextInput,
-  Button,
-  SelectItem,
-  Group,
-  Paper,
-  Title,
-  Container
-} from '@mantine/core';
-import React, {ChangeEvent} from 'react';
+import {Button, Container, Grid, Group, Paper, Select, SelectItem, Text, TextInput, Title} from '@mantine/core';
+import React, {ChangeEvent, useState} from 'react';
 import InputWithTooltip from "../InputWithTooltip";
 import {IFieldOperator, ISetModifier, ISetModifierActionGroup} from "../../common/interfaces";
 import {useAppDispatch, useAppSelector} from "../../common/hooks";
@@ -27,19 +16,28 @@ import {
   selectFieldsVisibility,
   setAction,
   setField,
-  setFieldOperator, setIndirectField, setOtherField, setSelectionOperator, setValue1
+  setFieldOperator,
+  setIndirectField,
+  setOtherField,
+  setSelectionOperator,
+  setValue1
 } from "../../features/set-modifier-form/setModifierFormSlice";
 import {ISelectionOperator} from "../../common/interfaces/ISelectionOperator";
 import {openConfirmModal} from "@mantine/modals";
 import {selectEnvironment} from "../../features/ui/uiSlice";
 import {Environment} from "../../common/enums/Environment";
 import {
-  ttSetModifier,
+  ttSmAction,
   ttSmField,
-  ttSmFieldOperation, ttSmIndirectField,
+  ttSmFieldOperation,
+  ttSmIndirectField,
   ttSmOtherField,
-  ttSmSelectionOperator, ttSmValue1
+  ttSmSelectionOperator,
+  ttSmValue1
 } from "../../common/tooltips";
+import './SetModifierForm.scss'
+import {useForm} from "@mantine/form";
+import {ActionEnum} from "../../features/set-modifier-form/enums/ActionEnum";
 
 interface Props {
   state: ISetModifier
@@ -53,16 +51,49 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
   const setModifierActionGroups: ISetModifierActionGroup[] = useAppSelector(selectSetModifierActionGroups);
   const fieldVisibility = useAppSelector(selectFieldsVisibility);
   const environment = useAppSelector(selectEnvironment);
+  const [hasFormErrors, setHasFormErrors] = useState<boolean>(false);
+
+  const form = useForm({
+      initialValues: {
+        sm_action: '',
+        sm_field: ''
+      },
+      validateInputOnChange: true,
+      validate: (values) => {
+        console.log('useForm:values', values);
+        if (values.sm_action === '') {
+          return {
+            sm_action: 'Selection is required'
+          }
+        }
+        if (values.sm_action as ActionEnum === ActionEnum.set_remove) {
+          console.log('we have set remove');
+          return {
+            sm_field: values.sm_field.length === 0 ? 'Field is required' : null
+          }
+        } else if (values.sm_action as ActionEnum === ActionEnum.undefined) {
+          return {}
+        }
+        return {}
+      }
+    }
+  );
 
   const handleActionChange = (value: string | null) => {
     dispatch(setAction(value))
   }
 
   const handleSave = () => {
-    // Handles both add & save scenarios ...
-    dispatch(saveSetModifier(state));
-    dispatch(initFormState());
-    dispatch(setModifierModalVisibility(false));
+    // form.validate();
+    if (!form.isValid()) {
+      console.error('Form is not valid');
+      return;
+    } else {
+      // Handles both add & save scenarios ...
+      dispatch(saveSetModifier(state));
+      dispatch(initFormState());
+      dispatch(setModifierModalVisibility(false));
+    }
   }
 
   const handleResetForm = () => {
@@ -114,6 +145,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
                             hidden={!fieldVisibility.sm_action}
                             inputField={
                               <Select
+                                name='sm_action'
                                 data={itemsSetModifierActionGroups}
                                 placeholder='Select one of the actions'
                                 allowDeselect
@@ -133,7 +165,7 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
                                 }}
                               />
                             }
-                            tooltip={ttSetModifier}
+                            tooltip={ttSmAction}
 
           />
         </Grid.Col>
@@ -258,13 +290,22 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
         </Grid>
       </Container>
 
-      <Container id='sm_section_preview' hidden={!fieldVisibility.sm_section_preview}>
-        <Title order={5}>Explanation</Title>
-        <SetModifierDescription
-          id='sm_description'
-          hidden={false}
-          value={state.Explanation ?? ''}
-        />
+      <Container px={0} id='sm_section_preview' hidden={!fieldVisibility.sm_section_preview}
+                 className='result--container'>
+        <Title order={5}>Result</Title>
+        <Grid gutter={12} pt={20}>
+          <Grid.Col span={1} style={{width: '20px', textAlign: 'center'}}>
+            <IconCheck style={{display: form.isValid() ? 'block' : 'none'}} className='icon-ok'></IconCheck>
+            <IconX style={{display: form.isValid() ? 'none' : 'block'}} className='icon-nok'></IconX>
+          </Grid.Col>
+          <Grid.Col span={11}>
+            <SetModifierDescription
+              id='sm_description'
+              hidden={false}
+              value={state.Explanation ?? ''}
+            />
+          </Grid.Col>
+        </Grid>
       </Container>
 
       <Group position='apart' mt='xl' pt={10}>

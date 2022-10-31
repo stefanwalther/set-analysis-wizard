@@ -1,8 +1,7 @@
 import React from 'react';
 import './SetIdentifierSelect.scss'
-import {Select, SelectItem, ActionIcon, Grid, Tooltip} from '@mantine/core';
-import {IconInfoCircle} from "@tabler/icons";
-import {ISetIdentifierGroup} from "../../common/interfaces/ISetIdentiferGroup";
+import {Select, SelectItem} from '@mantine/core';
+import {ISetIdentifierGroup} from "../../common/interfaces";
 import InputWithTooltip from "../InputWithTooltip";
 import {ttSetIdentifier} from "../../common/tooltips";
 

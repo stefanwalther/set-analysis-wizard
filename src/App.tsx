@@ -3,8 +3,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import './App.scss';
 import {NavHeader} from "./components/NavHeader";
-import {Affix, Container} from "@mantine/core";
-import NavFooter from "./components/NavFooter";
+import {Container} from "@mantine/core";
 import Home from "./pages/Home";
 import Examples from "./pages/Examples";
 import About from "./pages/About";

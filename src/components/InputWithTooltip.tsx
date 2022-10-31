@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActionIcon, Grid, Popover, Tooltip, TooltipProps, Text, HoverCard} from "@mantine/core";
+import {ActionIcon, Grid, TooltipProps, Text, HoverCard} from "@mantine/core";
 import {IconInfoCircle} from "@tabler/icons";
 import './InputWithTooltip.scss';
 import ReactDOMServer from 'react-dom/server';

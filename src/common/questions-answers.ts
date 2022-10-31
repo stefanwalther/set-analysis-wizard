@@ -7,6 +7,11 @@ interface IQuestionsAndAnswer {
    * The answer.
    */
   a: string;
+
+  /**
+   * Tags
+   */
+  t?: string[];
 }
 export const questionsAndAnswers: IQuestionsAndAnswer[] = [
   {

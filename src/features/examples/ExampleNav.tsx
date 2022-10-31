@@ -10,7 +10,7 @@ const ExampleNav: React.FC<Props> = ({items}: Props) => {
 
   const navItems = items.map(nav => {
     return (
-      <div>
+      <div key={'container-' + nav.key}>
         <Box<'a'>
           component="a"
           key={nav.key}
@@ -19,8 +19,8 @@ const ExampleNav: React.FC<Props> = ({items}: Props) => {
           {nav.exampleGroups?.map(sNav => {
             return (
               <Box<'a'>
-                key={sNav.key}
-                sx={(theme) => ({paddingLeft: 1 * theme.spacing.md})}
+                key={'sNav-' + sNav.key}
+                sx={(theme) => ({paddingLeft: 1.2 * theme.spacing.md})}
               >
                 {sNav.navTitle}
               </Box>

@@ -1,4 +1,6 @@
-export interface IExample {
+import {ISetAnalysisDefinitionProps} from "../../wizard/interfaces/ISetAnalysisDefinitionProps";
+
+export interface IExampleItem {
   // Sort order within the group, nothing else
   sort: number;
 
@@ -10,4 +12,6 @@ export interface IExample {
 
   // The resulting formula
   expression: string;
+
+  props?: ISetAnalysisDefinitionProps
 }

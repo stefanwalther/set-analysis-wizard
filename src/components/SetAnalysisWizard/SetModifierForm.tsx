@@ -51,7 +51,6 @@ const SetModifierForm: React.FC<Props> = ({state}: Props) => {
   const setModifierActionGroups: ISetModifierActionGroup[] = useAppSelector(selectSetModifierActionGroups);
   const fieldVisibility = useAppSelector(selectFieldsVisibility);
   const environment = useAppSelector(selectEnvironment);
-  const [hasFormErrors, setHasFormErrors] = useState<boolean>(false);
 
   const form = useForm({
       initialValues: {

@@ -1,21 +1,23 @@
 import React from 'react';
-import ExampleList from "../features/examples/ExampleList";
-import {exampleGroups} from "../features/examples/examples";
+import ExampleItemList from "../features/examples/ExampleItemList";
 import ExampleNav from "../features/examples/ExampleNav";
 import {Grid} from "@mantine/core";
 import PageHeader from "../components/PageHeader";
-import {selectGroupItems} from "../features/examples/examplesSlice";
+import {selectExampleList, selectSelectedItems} from "../features/examples/examplesSlice";
 import {useAppSelector} from "../common/hooks";
+import {ISetAnalysisDefinitionProps} from "../features/wizard/interfaces/ISetAnalysisDefinitionProps";
 
 interface Props {
 }
 
 const Examples: React.FC<Props> = (props) => {
 
-  const groupItems = useAppSelector(selectGroupItems);
+  const groupItems = useAppSelector(selectExampleList);
+  const exampleList = useAppSelector(selectSelectedItems)?.items;
 
-
-  const exampleGroup = exampleGroups.find((eg) => eg.key === 'main-group-basic')?.exampleGroups?.find((eg) => eg.key === 'basic-simple');
+  const handleLoadExpression = (setAnalysisDefinitionProps: ISetAnalysisDefinitionProps) => {
+    console.log('props', setAnalysisDefinitionProps);
+  }
 
   return (
     <div>
@@ -25,7 +27,7 @@ const Examples: React.FC<Props> = (props) => {
           <ExampleNav items={groupItems}></ExampleNav>
         </Grid.Col>
         <Grid.Col span='auto'>
-          <ExampleList exampleGroup={exampleGroup}></ExampleList>
+          <ExampleItemList exampleItemList={exampleList}></ExampleItemList>
         </Grid.Col>
       </Grid>
     </div>

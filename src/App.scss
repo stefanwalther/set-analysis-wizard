@@ -1,20 +1,25 @@
-.App {
-  text-align: center;
+html {
+  // Scrollbar should always be on to prevent layout shift
+  overflow-y:scroll;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+//.App {
+//  text-align: center;
+//}
 
-.app-navheader {
+//.App-logo {
+//  height: 40vmin;
+//  pointer-events: none;
+//}
 
-}
+//.app-navheader {
+//
+//}
 
 .app-container {
   size: 960px;
-  height: calc(100vh - 56px);
-  background-color: #fafafa;
+  min-height: calc(100vh - 56px);
+  //background-color: #fafafa;
   border-left-width: 1px;
   border-left-color: #ccc;
   border-left-style: solid;
@@ -24,9 +29,9 @@
   text-align: left;
 }
 
-.app-footer {
-
-}
+//.app-footer {
+//
+//}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

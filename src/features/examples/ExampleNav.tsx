@@ -1,12 +1,57 @@
-import {Box} from '@mantine/core';
+import {Box, createStyles} from '@mantine/core';
 import React from 'react';
-import {IExampleGroup} from "./interfaces/IExampleGroup";
+import {IExampleList} from "./interfaces/IExampleList";
+import {useAppDispatch, useAppSelector} from "../../common/hooks";
+import {selectedSelectedList, setSelectedList} from "./examplesSlice";
 
 interface Props {
-  items: IExampleGroup[]
+  items: IExampleList[];
+  active?: string;
 }
 
+const useStyles = createStyles((theme) => ({
+  link: {
+    ...theme.fn.focusStyles(),
+    display: 'block',
+    textDecoration: 'none',
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+    lineHeight: 1.2,
+    fontSize: theme.fontSizes.sm,
+    padding: theme.spacing.xs,
+    borderTopRightRadius: theme.radius.sm,
+    borderBottomRightRadius: theme.radius.sm,
+    borderLeft: `1px solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+    }`,
+
+    '&:hover': {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    },
+  },
+
+  linkActive: {
+    fontWeight: 500,
+    borderLeftColor: theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 6 : 7],
+    color: theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 2 : 7],
+
+    '&, &:hover': {
+      backgroundColor:
+        theme.colorScheme === 'dark'
+          ? theme.fn.rgba(theme.colors[theme.primaryColor][9], 0.25)
+          : theme.colors[theme.primaryColor][0],
+    },
+  },
+}));
+
 const ExampleNav: React.FC<Props> = ({items}: Props) => {
+
+  const {classes, cx} = useStyles();
+  const dispatch = useAppDispatch();
+  const activeList = useAppSelector(selectedSelectedList)
+
+  const handleClick = (key: string) => {
+    dispatch(setSelectedList(key));
+  }
 
   const navItems = items.map(nav => {
     return (
@@ -14,18 +59,20 @@ const ExampleNav: React.FC<Props> = ({items}: Props) => {
         <Box<'a'>
           component="a"
           key={nav.key}
+          href={'#' + nav.key}
+          onClick={() => {
+            if (nav.level > 1) {
+              handleClick(nav.key);
+            }
+          }}
+          className={cx(classes.link, {[classes.linkActive]: activeList === nav.key})}
+          sx={(theme) => ({
+            paddingLeft: nav.level * theme.spacing.md,
+            fontWeight: nav.level === 1 ? 600 : 300,
+            cursor: nav.level === 1 ? 'default' : 'pointer',
+          })}
         >
           {nav.navTitle}
-          {nav.exampleGroups?.map(sNav => {
-            return (
-              <Box<'a'>
-                key={'sNav-' + sNav.key}
-                sx={(theme) => ({paddingLeft: 1.2 * theme.spacing.md})}
-              >
-                {sNav.navTitle}
-              </Box>
-            )
-          })}
         </Box>
       </div>
     )

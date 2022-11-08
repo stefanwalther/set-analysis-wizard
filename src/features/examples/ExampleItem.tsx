@@ -7,9 +7,10 @@ interface Props {
   formattedTitle: string;
   expression: string;
   itemKey: string;
+  onSelect?: (key: string) => void;
 }
 
-const ExampleItem: React.FC<Props> = ({nr, formattedTitle, expression, itemKey}: Props) => {
+const ExampleItem: React.FC<Props> = ({nr, formattedTitle, expression, itemKey, onSelect}: Props) => {
   return (
     <Grid className='example-item--container'>
       <Grid.Col span={1} className='number--container'>
@@ -27,7 +28,16 @@ const ExampleItem: React.FC<Props> = ({nr, formattedTitle, expression, itemKey}:
       </Grid.Col>
       <Grid.Col span='content' className='button--container'>
         <Center inline style={{height: '100%'}}>
-          <Button className='button-open'>Open in Wizard</Button>
+          <Button
+            className='button-open'
+            onClick={() => {
+              if (onSelect) {
+                onSelect(itemKey);
+              }
+            }}
+          >
+            Open in Wizard
+          </Button>
         </Center>
       </Grid.Col>
     </Grid>)

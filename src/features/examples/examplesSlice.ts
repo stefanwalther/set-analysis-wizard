@@ -1,28 +1,42 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../state";
-import {IExampleGroup} from "./interfaces/IExampleGroup";
+import {IExampleList} from "./interfaces/IExampleList";
 import {exampleGroups as EXAMPLES} from './examples';
 
 interface ExamplesState {
-  selectedGroup: string;
-  selectedExample: string;
-  groupItems: IExampleGroup[]
+  selectedListKey: string;
+  selectedItemKey: string;
+  listItems: IExampleList[]
 }
 
 const initialState: ExamplesState = {
-  selectedGroup: '',
-  selectedExample: '',
-  groupItems: EXAMPLES
+  selectedListKey: 'basic-simple',
+  selectedItemKey: '',
+  listItems: EXAMPLES
 }
 
 export const examplesSlice = createSlice({
   name: 'ui',
   initialState,
-  reducers: {}
+  reducers: {
+    setSelectedList: (state: ExamplesState, action: PayloadAction<string>) => {
+      state.selectedListKey = action.payload;
+    },
+  }
 });
 
-export const {} = examplesSlice.actions;
+export const {
+  setSelectedList
+} = examplesSlice.actions;
 export default examplesSlice.reducer;
 
 // Selectors
-export const selectGroupItems = (state: RootState): IExampleGroup[] => state.examples.groupItems;
+export const selectExampleList = (state: RootState): IExampleList[] => state.examples.listItems;
+export const selectedSelectedList = (state: RootState): string => state.examples.selectedListKey;
+export const selectedItemKey = (state: RootState): string => state.examples.selectedItemKey;
+export const selectSelectedItems = (state: RootState): IExampleList | undefined => {
+  let list = state.examples.listItems.find((item: IExampleList) => item.key === state.examples.selectedListKey);
+  if (list) {
+    return list;
+  }
+}

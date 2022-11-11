@@ -5,12 +5,12 @@ import {Button, Grid, Center, Code} from '@mantine/core';
 interface Props {
   nr: number;
   formattedTitle: string;
-  expression: string;
+  formattedExpression: string;
   itemKey: string;
   onSelect?: (key: string) => void;
 }
 
-const ExampleItem: React.FC<Props> = ({nr, formattedTitle, expression, itemKey, onSelect}: Props) => {
+const ExampleItem: React.FC<Props> = ({nr, formattedTitle, formattedExpression, itemKey, onSelect}: Props) => {
   return (
     <Grid className='example-item--container'>
       <Grid.Col span={1} className='number--container'>
@@ -22,7 +22,7 @@ const ExampleItem: React.FC<Props> = ({nr, formattedTitle, expression, itemKey, 
         <div className='formattedTitle' dangerouslySetInnerHTML={{__html: formattedTitle}}></div>
         <div className='expression--container'>
           <Code color='yellow'>
-            {expression}
+            <span dangerouslySetInnerHTML={{__html: formattedExpression}}></span>
           </Code>
         </div>
       </Grid.Col>

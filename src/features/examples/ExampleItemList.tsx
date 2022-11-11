@@ -29,7 +29,7 @@ const ExampleItemList: React.FC<Props> = (props: Props) => {
         key={index.toString()}
         nr={index +1}
         formattedTitle={example.formattedTitle}
-        expression={example.expression}
+        formattedExpression={example.formattedExpression}
         itemKey={example.key}
         onSelect={(key: string) => {
           handleClick(key);

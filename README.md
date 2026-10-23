@@ -2,20 +2,27 @@
 
 The Set Analysis Wizard helps QlikView and Qlik Sense authors build Set Analysis expressions without memorizing the syntax. The hosted version became one of the most used tools of its kind.
 
-This repository holds the open-source effort around the wizard: source, tests, the legacy implementation and preserved feature branches.
+This repository holds the open-source effort around the wizard, including the MVP rewrite as a React app.
+
+## Run the app (MVP)
+
+Requires Node 16 (see `.nvmrc`):
+
+```sh
+$ npm install
+$ npm start      # dev server
+$ npm run build  # production build
+$ npm test       # test suite
+$ npm run lint   # eslint
+```
+
+See also [docs/get-started.md](./docs/get-started.md) and [docs/development.md](./docs/development.md).
 
 ## Contents
 
-- `src/` - current source (`index.ts`)
-- `test/` - specs and expression testers
-- `legacy_1/` - the original ASP.NET implementation, including examples and unit tests
-- `legacy_2/` - supporting files
+- `src/` - the MVP React + TypeScript app (tests live next to the code)
 - `docs/` - background notes on the project
-
-## Branches of interest
-
-- `keep/mvp-v2` - preserved work toward a new version of the wizard
-- `keep/basic-project-setup` - preserved early project setup
+- `keep/mvp-v2`, `keep/basic-project-setup` - preserved pre-merge branches
 
 ## Background
 

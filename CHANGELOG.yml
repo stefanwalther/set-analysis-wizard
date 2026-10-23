@@ -1,9 +1,0 @@
-v0.0.1:
-  date: "2015-07-09"
-  new:
-    - Set up project structure
-    - Include sense-go
-v0.0.2:
-  date: "2022-09-20"
-  new:
-    - Cleaning up the old project

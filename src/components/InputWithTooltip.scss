@@ -1,0 +1,16 @@
+.input-with-tooltip--container {
+  .title {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #282c34;
+    margin-bottom: 1.2em;
+  }
+  .description {
+    padding-bottom: 1em;
+  }
+  hr {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #efefef;
+  }
+}
